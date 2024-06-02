@@ -1,0 +1,10 @@
+﻿Item/Step,1,2
+Step Name,Water,Dry
+Air#1,Off,On
+Air#2,Off,On
+Water#1,On,Off
+Water#2,On,Off
+Water#3,On,Off
+Water#4,On,Off
+Water#5,On,Off
+공정 시간,300,300
