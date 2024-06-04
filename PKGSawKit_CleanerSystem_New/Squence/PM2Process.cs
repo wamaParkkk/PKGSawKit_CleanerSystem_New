@@ -3,7 +3,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace PKGSawKit_CleanerSystem_New.Squence
 {
@@ -13,13 +12,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         public int StepNum;             // Process step number
 
         public string[] StepName;       // Process step name        
-        public string[] Air1;
-        public string[] Air2;
-        public string[] Water1;        
-        public string[] Water2;
-        public string[] Water3;
-        public string[] Water4;
-        public string[] Water5;
+        public string[] Air;        
+        public string[] Water;
         public double[] ProcessTime;     // Process time
     }
 
@@ -41,13 +35,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             alarm_List = new Alarm_List();
 
             prcsRecipe.StepName = new string[Define.RECIPE_MAX_STEP];       // Max 50 step
-            prcsRecipe.Air1 = new string[Define.RECIPE_MAX_STEP];
-            prcsRecipe.Air2 = new string[Define.RECIPE_MAX_STEP];
-            prcsRecipe.Water1 = new string[Define.RECIPE_MAX_STEP];            
-            prcsRecipe.Water2 = new string[Define.RECIPE_MAX_STEP];
-            prcsRecipe.Water3 = new string[Define.RECIPE_MAX_STEP];
-            prcsRecipe.Water4 = new string[Define.RECIPE_MAX_STEP];
-            prcsRecipe.Water5 = new string[Define.RECIPE_MAX_STEP];
+            prcsRecipe.Air = new string[Define.RECIPE_MAX_STEP];            
+            prcsRecipe.Water = new string[Define.RECIPE_MAX_STEP];
             prcsRecipe.ProcessTime = new double[Define.RECIPE_MAX_STEP];
 
             thread.Start();
@@ -183,13 +172,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 for (int i = 0; i < Define.RECIPE_MAX_STEP; i++)
                 {
                     prcsRecipe.StepName[i] = string.Empty;
-                    prcsRecipe.Air1[i] = string.Empty;
-                    prcsRecipe.Air2[i] = string.Empty;
-                    prcsRecipe.Water1[i] = string.Empty;                    
-                    prcsRecipe.Water2[i] = string.Empty;
-                    prcsRecipe.Water3[i] = string.Empty;
-                    prcsRecipe.Water4[i] = string.Empty;
-                    prcsRecipe.Water5[i] = string.Empty;
+                    prcsRecipe.Air[i] = string.Empty;                    
+                    prcsRecipe.Water[i] = string.Empty;
                     prcsRecipe.ProcessTime[i] = 0;
                 }
 
@@ -216,7 +200,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     case 1:
                         {
-                            P_PROCESS_DoorCheck("Close");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -240,7 +224,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 5:
                         {
-                            P_Cylinder_FwdBwd_Seq("Home");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -289,7 +273,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 13:
                         {
-                            P_PROCESS_DoorCheck("Open");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -334,7 +318,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 2:
                         {
-                            P_PROCESS_DoorCheck("Close");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -352,7 +336,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 5:
                         {
-                            P_PROCESS_DoorCheck("Open");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -368,76 +352,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         /////////////////////////////////////////////////////////////////////////////////////
         
         // FUNCTION /////////////////////////////////////////////////////////////////////////
-        #region PROCESS FUNCTION        
-        private void P_PROCESS_DoorCheck(string OpCl)
-        {
-            if (step.Flag)
-            {
-                Global.EventLog("Check the door " + OpCl, ModuleName, "Event");
-                
-                if (OpCl == "Open")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_Door_Open_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH2_Door_Close_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-                else if (OpCl == "Close")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_Door_Open_o, (uint)DigitalOffOn.Off, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH2_Door_Close_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (Define.bInterlockRelease)
-                {
-                    F_INC_STEP();
-                    return;
-                }
-
-                if (OpCl == "Open")
-                {
-                    if ((Global.GetDigValue((int)DigInputList.CH2_Door_Op_i) == "On") &&
-                        (Global.GetDigValue((int)DigInputList.CH2_Door_Cl_i) == "Off"))
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        if (step.Times >= Configure_List.Door_OpCl_Timeout)
-                        {
-                            ShowAlarm("1000");
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                }                    
-                else
-                {
-                    if ((Global.GetDigValue((int)DigInputList.CH2_Door_Op_i) == "Off") &&
-                        (Global.GetDigValue((int)DigInputList.CH2_Door_Cl_i) == "On"))
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        if (step.Times >= Configure_List.Door_OpCl_Timeout)
-                        {
-                            ShowAlarm("1001");
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                }                               
-            }
-        }
-
+        #region PROCESS FUNCTION                
         private void P_PROCESS_RecipeLoading(string FileName)
         {
             if (step.Flag)
@@ -510,11 +425,11 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                         for (int i = 0; i < prcsRecipe.TotalStep; i++)
                         {
-                            prcsRecipe.Air1[i] = data[i + 1];   // Air1
+                            prcsRecipe.Air[i] = data[i + 1];    // Air
                         }
 
                         lineNum++;
-                    }
+                    }                    
                     else if (lineNum == 3)
                     {
                         string line = sr.ReadLine();
@@ -522,72 +437,12 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                         for (int i = 0; i < prcsRecipe.TotalStep; i++)
                         {
-                            prcsRecipe.Air2[i] = data[i + 1];   // Air2
+                            prcsRecipe.Water[i] = data[i + 1];  // Water
                         }
 
                         lineNum++;
-                    }
+                    }                                        
                     else if (lineNum == 4)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water1[i] = data[i + 1];   // Water1
-                        }
-
-                        lineNum++;
-                    }                    
-                    else if (lineNum == 5)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water2[i] = data[i + 1];   // Water2
-                        }
-
-                        lineNum++;
-                    }
-                    else if (lineNum == 6)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water3[i] = data[i + 1];   // Water3
-                        }
-
-                        lineNum++;
-                    }
-                    else if (lineNum == 7)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water4[i] = data[i + 1];   // Water4
-                        }
-
-                        lineNum++;
-                    }
-                    else if (lineNum == 8)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water5[i] = data[i + 1];   // Water5
-                        }
-
-                        lineNum++;
-                    }
-                    else if (lineNum == 9)
                     {
                         string line = sr.ReadLine();
                         string[] data = line.Split(',');
@@ -627,77 +482,22 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                // Air1
-                if (prcsRecipe.Air1[prcsRecipe.StepNum - 1] == "On")
+                // Air
+                if (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "On") // [prcsRecipe.StepNum - 1]이 구조체적으로 현재 Step임
                 {
-                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_1_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterAirValve_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterAirValve_o, (uint)DigitalOffOn.Off, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);                    
                 }
 
-                // Air2
-                if (prcsRecipe.Air2[prcsRecipe.StepNum - 1] == "On")
+                // Water
+                if (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "On")
                 {
-                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_2_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);                    
                 }
 
-                // Water1
-                if (prcsRecipe.Water1[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_1_o, (uint)DigitalOffOn.On, ModuleName);                    
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-
-                // Water2
-                if (prcsRecipe.Water2[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_2_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-
-                // Water3
-                if (prcsRecipe.Water3[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_3_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_3_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-
-                // Water4
-                if (prcsRecipe.Water4[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_4_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_4_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-
-                // Water5
-                if (prcsRecipe.Water5[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_5_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_5_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
+                // Curtain air
+                Global.SetDigValue((int)DigOutputList.CH2_Curtain_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
 
                 step.Flag = false;
                 step.Times = 1;
@@ -833,16 +633,15 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private void F_PROCESS_ALL_VALVE_CLOSE()
         {
             // Air
-            Global.SetDigValue((int)DigOutputList.CH2_AirValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_AirValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterAirValve_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
 
             // Water
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_3_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_4_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_5_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Curtain air
+            Global.SetDigValue((int)DigOutputList.CH2_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
         
         private void F_DAILY_COUNT()

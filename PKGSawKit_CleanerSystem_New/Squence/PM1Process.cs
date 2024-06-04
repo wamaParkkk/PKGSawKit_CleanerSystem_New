@@ -31,9 +31,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private new TStep step;
         TPrcsRecipe prcsRecipe; // Recipe struct
         TCheckFlag checkFlag;
-        Alarm_List alarm_List;  // Alarm list
-        
-        bool bBrushUseCheck;        
+        Alarm_List alarm_List;  // Alarm list                
 
         public PM1Process()
         {
@@ -202,8 +200,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepCurrentTime[module] = 1;
                 Global.prcsInfo.prcsStepTotalTime[module] = 0;
                 Global.prcsInfo.prcsEndTime[module] = string.Empty;
-                
-                bBrushUseCheck = false;                
+                                
 
                 Define.seqCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqSts[module] = Define.STS_PROCESS_ING;
@@ -219,7 +216,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {                    
                     case 1:
                         {
-                            P_PROCESS_DoorCheck("Close");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -263,19 +260,19 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 12:
                         {
-                            P_Brush_UpDn_Seq("Up");
+                            F_INC_STEP();
                         }
                         break;
 
                     case 13:
                         {
-                            P_PROCESS_Brush_Down_Position();
+                            F_INC_STEP();
                         }
                         break;
 
                     case 14:
                         {
-                            P_Brush_UpDn_Seq("Down");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -311,14 +308,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 20:
                         {
-                            P_Brush_UpDn_Seq("Up");
+                            F_INC_STEP();
                         }
                         break;
 
                     case 21:
                         {
-                            //P_Brush_FwdBwd_Seq("Home");
-                            P_Brush_FwdBwd_Seq("Clean");
+                            P_Brush_FwdBwd_Seq("Home");                            
                         }
                         break;
 
@@ -330,7 +326,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 23:
                         {
-                            P_PROCESS_DoorCheck("Open");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -349,21 +345,14 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         break;
 
                     case 51:
-                        {                         
-                            P_Brush_UpDn_Seq("Up");
+                        {
+                            F_INC_STEP();
                         }
                         break;
 
                     case 52:
-                        {                         
-                            if (bBrushUseCheck)
-                            {
-                                P_Brush_FwdBwd_Seq("Clean");
-                            }
-                            else
-                            {
-                                P_Brush_FwdBwd_Seq("Home");
-                            }
+                        {
+                            P_Brush_FwdBwd_Seq("Home");
                         }
                         break;
 
@@ -411,7 +400,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 60:
                         {
-                            P_PROCESS_DoorCheck("Open");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -462,13 +451,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 3:
                         {
-                            P_PROCESS_DoorCheck("Close");
+                            F_INC_STEP();
                         }
                         break;
 
                     case 4:
                         {
-                            P_Brush_UpDn_Seq("Up");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -486,7 +475,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     case 7:
                         {
-                            P_PROCESS_DoorCheck("Open");
+                            F_INC_STEP();
                         }
                         break;
 
@@ -502,77 +491,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         /////////////////////////////////////////////////////////////////////////////////////
                 
         // FUNCTION /////////////////////////////////////////////////////////////////////////
-        #region PROCESS FUNCTION
-        private void P_PROCESS_DoorCheck(string OpCl)
-        {
-            if (step.Flag)
-            {
-                Global.EventLog("Check the door " + OpCl, ModuleName, "Event");                
-                
-                if (OpCl == "Open")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH1_Door_Open_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH1_Door_Close_o, (uint)DigitalOffOn.Off, ModuleName);
-
-                }
-                else if (OpCl == "Close")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH1_Door_Open_o, (uint)DigitalOffOn.Off, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH1_Door_Close_o, (uint)DigitalOffOn.On, ModuleName);                    
-                }
-
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (Define.bInterlockRelease)
-                {
-                    F_INC_STEP();
-                    return;
-                }
-
-                if (OpCl == "Open")
-                {
-                    if ((Global.GetDigValue((int)DigInputList.CH1_Door_Op_i) == "On") &&
-                        (Global.GetDigValue((int)DigInputList.CH1_Door_Cl_i) == "Off"))
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        if (step.Times >= Configure_List.Door_OpCl_Timeout)
-                        {
-                            ShowAlarm("1000");
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                }                    
-                else
-                {
-                    if ((Global.GetDigValue((int)DigInputList.CH1_Door_Op_i) == "Off") &&
-                        (Global.GetDigValue((int)DigInputList.CH1_Door_Cl_i) == "On"))
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        if (step.Times >= Configure_List.Door_OpCl_Timeout)
-                        {
-                            ShowAlarm("1001");
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                }                               
-            }
-        }
-
+        #region PROCESS FUNCTION        
         private void P_PROCESS_RecipeLoading(string FileName)
         {
             if (step.Flag)
@@ -588,7 +507,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     ImportExcelData_Read(FileName);
 
-                    prcsRecipe.StepNum= 1; // Recipe 현재 스탭 초기화
+                    prcsRecipe.StepNum = 1; // Recipe 현재 스탭 초기화
                    
                     Global.EventLog("Recipe file was successfully read.", ModuleName, "Event");
 
@@ -657,24 +576,12 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                         for (int i = 0; i < prcsRecipe.TotalStep; i++)
                         {
-                            prcsRecipe.Water1[i] = data[i + 1];   // Water1
+                            prcsRecipe.Water[i] = data[i + 1];   // Water
                         }
 
                         lineNum++;
-                    }
+                    }                                 
                     else if (lineNum == 4)
-                    {
-                        string line = sr.ReadLine();
-                        string[] data = line.Split(',');
-
-                        for (int i = 0; i < prcsRecipe.TotalStep; i++)
-                        {
-                            prcsRecipe.Water2[i] = data[i + 1];   // Water2
-                        }
-
-                        lineNum++;
-                    }                    
-                    else if (lineNum == 5)
                     {
                         string line = sr.ReadLine();
                         string[] data = line.Split(',');
@@ -686,7 +593,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                         lineNum++;
                     }                    
-                    else if (lineNum == 6)
+                    else if (lineNum == 5)
                     {
                         string line = sr.ReadLine();
                         string[] data = line.Split(',');
@@ -721,16 +628,14 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             }
             else
             {
-                if (prcsRecipe.Brush[prcsRecipe.StepNum - 1] == "On")
+                if (prcsRecipe.Brush[prcsRecipe.StepNum - 1] == "On")   // [prcsRecipe.StepNum - 1]이 구조체적으로 현재 Step임
                 {
                     if (Define.seqCylinderCtrl[module] != Define.CTRL_IDLE)
                     {
                         Define.seqCylinderCtrl[module] = Define.CTRL_ABORT;                        
                     }                    
 
-                    Thread.Sleep(500);
-
-                    bBrushUseCheck = true;
+                    Thread.Sleep(500);                    
 
                     step.Flag = true;
                     step.Layer = nStep;
@@ -744,9 +649,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         Define.seqBrushFwBwCtrl = Define.CTRL_ABORT;                        
                     }
                     
-                    Thread.Sleep(500);
-
-                    bBrushUseCheck = false;
+                    Thread.Sleep(500);                    
 
                     step.Flag = true;
                     step.Layer = nStep2;
@@ -876,113 +779,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                 }                
             }
-        }
-
-        private void P_Brush_UpDn_Seq(string UpDn)
-        {
-            if (step.Flag)
-            {
-                if (UpDn == "Up")
-                {
-                    Define.seqBrushUpDnMode = Define.MODE_BRUSH_UPDN_UP;
-                    Define.seqBrushUpDnCtrl = Define.CTRL_RUN;
-                    Define.seqBrushUpDnSts = Define.STS_BRUSH_UPDN_IDLE;
-                }
-                else
-                {
-                    Define.seqBrushUpDnMode = Define.MODE_BRUSH_UPDN_DOWN;
-                    Define.seqBrushUpDnCtrl = Define.CTRL_RUN;
-                    Define.seqBrushUpDnSts = Define.STS_BRUSH_UPDN_IDLE;
-                }
-                
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (UpDn == "Up")
-                {
-                    if (step.Times > 1)
-                    {
-                        if ((Define.seqBrushUpDnCtrl == Define.CTRL_IDLE) &&
-                            (Define.seqBrushUpDnSts == Define.STS_BRUSH_UPDN_UPEND))
-                        {                            
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                    else
-                    {
-                        step.INC_TIMES();
-                    }
-                }
-                else
-                {
-                    if (step.Times > 1)
-                    {
-                        if ((Define.seqBrushUpDnCtrl == Define.CTRL_IDLE) &&
-                            (Define.seqBrushUpDnSts == Define.STS_BRUSH_UPDN_DOWNEND))
-                        {                            
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                    else
-                    {
-                        step.INC_TIMES();
-                    }
-                }
-            }
-        }
-
-        private void P_PROCESS_Brush_Down_Position()
-        {
-            if (step.Flag)
-            {
-                Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
-
-                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off")
-                {
-                    F_INC_STEP();
-                }
-                else
-                {
-                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Fwd_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
-
-                    step.Flag = false;
-                    step.Times = 1;
-                }
-            }
-            else
-            {
-                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-
-                    Thread.Sleep(500);
-
-                    F_INC_STEP();
-                }
-                else
-                {
-                    if (step.Times >= Configure_List.Brush_FwdBwd_Timeout)
-                    {
-                        ShowAlarm("1031");
-                    }
-                    else
-                    {
-                        step.INC_TIMES_10();
-                    }
-                }
-            }
-        }
+        }                
 
         private void P_PROCESS_Brush_Rotation(string sAction)
         {
@@ -1070,16 +867,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_HOME;
                     Define.seqBrushFwBwCtrl = Define.CTRL_RUN;
                     Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_IDLE;                    
-                }
-                else if (sAction == "Clean")
-                {
-                    if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_IDLE) && (Define.seqBrushFwBwCtrl == Define.CTRL_IDLE))
-                    {
-                        Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_CLEAN;
-                        Define.seqBrushFwBwCtrl = Define.CTRL_RUN;
-                        Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_IDLE;                        
-                    }                    
-                }
+                }                
 
                 step.Flag = false;
                 step.Times = 1;
@@ -1108,18 +896,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     {
                         step.INC_TIMES();
                     }
-                }
-                else if (sAction == "Clean")
-                {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off")
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        step.INC_TIMES();
-                    }
-                }
+                }                
             }
         }
 
@@ -1143,25 +920,25 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 // Air
-                if (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "On")
+                if (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "On") // [prcsRecipe.StepNum - 1]이 구조체적으로 현재 Step임
                 {
-                    Global.SetDigValue((int)DigOutputList.CH1_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
+
                     checkFlag.AirFlag = true;
                 }                
 
-                // Water1
-                if (prcsRecipe.Water1[prcsRecipe.StepNum - 1] == "On")
+                // Water
+                if (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "On")
                 {                    
-                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_1_o, (uint)DigitalOffOn.On, ModuleName);
-                    checkFlag.Water1Flag = true;
-                }                
+                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
 
-                // Water2
-                if (prcsRecipe.Water2[prcsRecipe.StepNum - 1] == "On")
-                {
-                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_2_o, (uint)DigitalOffOn.On, ModuleName);
-                    checkFlag.Water2Flag = true;
-                }                                                              
+                    checkFlag.WaterFlag = true;
+                }
+
+                // Curtain air
+                Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
 
                 step.Flag = false;
                 step.Times = 1;
@@ -1299,29 +1076,30 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private void F_PROCESS_ALL_VALVE_CLOSE()
         {
             // Air
-            Global.SetDigValue((int)DigOutputList.CH1_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);            
-            
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);            
+
             // Water
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Curtain air
+            Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
 
         private void F_PROCESS_RECIPE_DESETTING()
         {
             if ((checkFlag.AirFlag) && (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "Off"))
             {
-                Global.SetDigValue((int)DigOutputList.CH1_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
             }
 
-            if ((checkFlag.Water1Flag) && (prcsRecipe.Water1[prcsRecipe.StepNum - 1] == "Off"))
+            if ((checkFlag.WaterFlag) && (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "Off"))
             {
-                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            }
-
-            if ((checkFlag.Water2Flag) && (prcsRecipe.Water2[prcsRecipe.StepNum - 1] == "Off"))
-            {
-                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-            }
+                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+            }            
         }      
         
         private void F_DAILY_COUNT()
@@ -1351,15 +1129,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                if (Define.seqBrushUpDnCtrl != Define.CTRL_IDLE)
-                {
-                    Define.seqBrushUpDnCtrl = Define.CTRL_IDLE;
-                }
-
-                if (Define.seqBrushFwBwCtrl != Define.CTRL_IDLE)
-                {
-                    Define.seqBrushFwBwCtrl = Define.CTRL_IDLE;
-                }
+                Define.seqBrushFwBwCtrl = Define.CTRL_ABORT;
 
                 step.Flag = false;
                 step.Times = 1;

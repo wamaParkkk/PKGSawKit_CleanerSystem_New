@@ -27,7 +27,7 @@ namespace PKGSawKit_CleanerSystem_New
                 pnl_DI00, pnl_DI01, pnl_DI02, pnl_DI03, pnl_DI04, pnl_DI05, pnl_DI06, pnl_DI07, 
                 pnl_DI08, pnl_DI09, pnl_DI10, pnl_DI11, pnl_DI12, pnl_DI13, pnl_DI14, pnl_DI15, 
                 pnl_DI16, pnl_DI17, pnl_DI18, pnl_DI19, pnl_DI20, pnl_DI21, pnl_DI22, pnl_DI23, 
-                pnl_DI24, pnl_DI25, pnl_DI26, pnl_DI21, pnl_DI27, pnl_DI28, pnl_DI29, pnl_DI30 };
+                pnl_DI24, pnl_DI25, pnl_DI26, pnl_DI27, pnl_DI28, pnl_DI29, pnl_DI30, pnl_DI31 };
 
             m_doBox = new CheckBox[Define.CH_MAX] {
                 rjToggleButton0, rjToggleButton1, rjToggleButton2, rjToggleButton3, rjToggleButton4, rjToggleButton5, rjToggleButton6, rjToggleButton7, 
@@ -40,7 +40,8 @@ namespace PKGSawKit_CleanerSystem_New
         {
             SetDoubleBuffered(groupBox1);
             SetDoubleBuffered(groupBox2);
-            SetDoubleBuffered(groupBox3);            
+            SetDoubleBuffered(groupBox3);
+            SetDoubleBuffered(groupBox4);
         }
 
         private void IOForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -68,7 +69,11 @@ namespace PKGSawKit_CleanerSystem_New
                     (i == (int)DigInputList.CH1_Brush_Bwd_i) ||
                     (i == (int)DigInputList.CH1_Brush_Home_i) ||
                     (i == (int)DigInputList.CH1_Nozzle_Fwd_i) ||
-                    (i == (int)DigInputList.CH1_Nozzle_Bwd_i))
+                    (i == (int)DigInputList.CH1_Nozzle_Bwd_i) ||
+
+                    (i == (int)DigInputList.CH2_Nozzle_Fwd_i) ||
+                    (i == (int)DigInputList.CH2_Nozzle_Bwd_i) ||
+                    (i == (int)DigInputList.CH2_Nozzle_Home_i))
                 {
                     if (Global.GetDigValue(i) == "Off")
                     {
@@ -135,7 +140,7 @@ namespace PKGSawKit_CleanerSystem_New
             }
         }
 
-        private void rjToggleButton16_Click(object sender, EventArgs e)
+        private void rjToggleButton18_Click(object sender, EventArgs e)
         {
             if (!Define.bInterlockRelease)
             {
@@ -173,6 +178,6 @@ namespace PKGSawKit_CleanerSystem_New
             {
                 Global.SetDigValue(iName, (uint)DigitalValue.Off, "PM1");
             }
-        }
+        }        
     }
 }

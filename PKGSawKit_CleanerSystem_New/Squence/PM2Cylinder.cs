@@ -1,5 +1,4 @@
-﻿using Ajin_motion_driver;
-using MsSqlManagerLibrary;
+﻿using MsSqlManagerLibrary;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,9 +9,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
     {
         Thread thread;
         private new TStep step;
-        Alarm_List alarm_List;  // Alarm list
-        
-        int nHomeCnt;
+        Alarm_List alarm_List;  // Alarm list               
 
         public PM2Cylinder()
         {
@@ -21,9 +18,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             
             thread = new Thread(new ThreadStart(Execute));
             
-            alarm_List = new Alarm_List();
-
-            Define.bHomeFlag = false;
+            alarm_List = new Alarm_List();            
 
             thread.Start();
         }
@@ -92,7 +87,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             F_PROCESS_ALL_VALVE_CLOSE();
 
-            MotionClass.SetMotorSStop(Define.axis_y);
+            Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
         }
 
         private void ShowAlarm(string almId)
@@ -125,20 +121,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             step.Times = 1;
         }
 
-        private void F_PROCESS_ALL_VALVE_CLOSE()
-        {
-            // Air
-            Global.SetDigValue((int)DigOutputList.CH2_AirValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_AirValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-
-            // Water
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_3_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_4_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_5_o, (uint)DigitalOffOn.Off, ModuleName);
-        }
-
         // CYLINDER PROGRESS ////////////////////////////////////////////////////////////////
         #region CYLINDER_PROGRESS
         private void Run_Progress()
@@ -157,40 +139,22 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_RUN) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
-                {
+                {                    
                     case 1:
-                        {
-                            P_CYLINDER_FwdBwd_Home();
-                        }
-                        break;
-
-                    case 2:
                         {
                             P_CYLINDER_FwdBwd("Forward");
                         }
                         break;
-
-                    case 3:
-                        {
-                            P_CYLINDER_Delay(1);
-                        }
-                        break;
-
-                    case 4:
+                        
+                    case 2:
                         {
                             P_CYLINDER_FwdBwd("Backward");
                         }
                         break;
-
-                    case 5:
+                        
+                    case 3:
                         {
-                            P_CYLINDER_Delay(1);
-                        }
-                        break;
-
-                    case 6:
-                        {
-                            P_CYLINDER_StepCheck(2);
+                            P_CYLINDER_StepCheck(1);
                         }
                         break;                    
                 }
@@ -204,9 +168,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Thread.Sleep(500);
                 step.Layer = 1;
                 step.Times = 1;
-                step.Flag = true;
-
-                Define.bHomeFlag = false;
+                step.Flag = true;                
 
                 Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_HOMEING;                
@@ -242,73 +204,50 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Global.EventLog("Cylinder : " + FwdBwd, ModuleName, "Event");
 
-                MotionClass.SetMotorVelocity(Define.axis_y, Configure_List.WaterBlock_Move_Speed);
-                MotionClass.SetMotorAccel(Define.axis_y, Configure_List.WaterBlock_Move_Speed * 2);
-                MotionClass.SetMotorDecel(Define.axis_y, Configure_List.WaterBlock_Move_Speed * 2);
-                MotionClass.SetMotorGearing(Define.axis_y, 1);
-
-                Thread.Sleep(500);
+                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
                 if (FwdBwd == "Forward")
                 {
-                    if ((MotionClass.motor[Define.axis_y].sR_HomeStatus == "+Limit") &&
-                        (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Ready"))
-                    {                        
+                    if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "Off")
+                    {
                         F_INC_STEP();
                     }
                     else
-                    {                                                
-                        if (Global.MOTION_INTERLOCK_CHECK())
-                        {                            
-                            MotionClass.MotorMove(Define.axis_y, Configure_List.WaterBlock_Fwd_Position);                            
-                        }
-                        
+                    {
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.On, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+
                         step.Flag = false;
                         step.Times = 1;
-                    }                    
+                    }
                 }
                 else if (FwdBwd == "Backward")
                 {
-                    if ((MotionClass.motor[Define.axis_y].sR_HomeStatus == "Home") &&
-                        (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Ready"))
-                    {                       
+                    if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "Off")
+                    {
                         F_INC_STEP();
                     }
                     else
-                    {                                               
-                        if (Global.MOTION_INTERLOCK_CHECK())
-                        {                                                        
-                            MotionClass.MotorMove(Define.axis_y, Configure_List.WaterBlock_Bwd_Position);
-                        }                        
+                    {
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.On, ModuleName);
 
                         step.Flag = false;
                         step.Times = 1;
-                    }                    
-                }                
+                    }
+                }
             }
             else
-            {                
+            {
                 if (FwdBwd == "Forward")
                 {
-                    if ((MotionClass.motor[Define.axis_y].sR_HomeStatus == "+Limit") &&
-                        (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Ready"))
-                    {                        
-                        F_INC_STEP();
-                    }
-                    else if (MotionClass.motor[Define.axis_y].sR_AlarmStatus == "Alarm")
+                    if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "Off")
                     {
-                        MotionClass.SetAlarmReset(Define.axis_y);
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                        //Thread.Sleep(500);
+                        Task.Delay(500);
 
-                        Thread.Sleep(500);
-
-                        if (step.Times >= 5)
-                        {
-                            step.Flag = true;
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
+                        F_INC_STEP();
                     }
                     else
                     {
@@ -324,25 +263,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else
                 {
-                    if ((MotionClass.motor[Define.axis_y].sR_HomeStatus == "Home") &&
-                        (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Ready"))
-                    {                        
-                        F_INC_STEP();
-                    }
-                    else if (MotionClass.motor[Define.axis_y].sR_AlarmStatus == "Alarm")
+                    if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "Off")
                     {
-                        MotionClass.SetAlarmReset(Define.axis_y);
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                        //Thread.Sleep(500);
+                        Task.Delay(500);
 
-                        Thread.Sleep(500);
-
-                        if (step.Times >= 5)
-                        {
-                            step.Flag = true;
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
+                        F_INC_STEP();
                     }
                     else
                     {
@@ -363,99 +290,42 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                if (Define.seqCylinderMode[module] == Define.MODE_CYLINDER_HOME)
+                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off")
                 {
-                    MotionClass.SetMotorSStop(Define.axis_y);
+                    F_INC_STEP();
+                }
+                else
+                {
+                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                    Thread.Sleep(1000);
-
-                    if (Global.MOTION_INTERLOCK_CHECK())
-                    {
-                        MotionClass.SetMotorHome(Define.axis_y);
-                    }
+                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.On, ModuleName);
 
                     step.Flag = false;
                     step.Times = 1;
-
-                    nHomeCnt = 0;
                 }
-                else
-                {
-                    if (Define.bHomeFlag)
-                    {
-                        F_INC_STEP();
-                    }
-                    else
-                    {
-                        MotionClass.SetMotorSStop(Define.axis_y);
-
-                        Thread.Sleep(1000);
-
-                        if (Global.MOTION_INTERLOCK_CHECK())
-                        {
-                            MotionClass.SetMotorHome(Define.axis_y);
-                        }
-
-                        step.Flag = false;
-                        step.Times = 1;
-
-                        nHomeCnt = 0;
-                    }
-                }                                
             }
             else
             {
-                if (step.Times > 20)
+                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off")
                 {
-                    if ((MotionClass.motor[Define.axis_y].sR_HomeStatus == "Home") &&
-                        (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Ready"))
-                    {                        
-                        Define.bHomeFlag = true;
+                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                    //Thread.Sleep(500);
+                    Task.Delay(500);
 
-                        if (nHomeCnt > 5)
-                        {
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            nHomeCnt++;
-                        }
-                    }
-                    else if (MotionClass.motor[Define.axis_y].sR_AlarmStatus == "Alarm")
-                    {
-                        MotionClass.SetAlarmReset(Define.axis_y);
-
-                        Thread.Sleep(500);
-
-                        if (step.Times >= 5)
-                        {
-                            step.Flag = true;
-                        }                            
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-
-                        nHomeCnt = 0;
-                    }
-                    else
-                    {
-                        if (step.Times >= Configure_List.Nozzle_FwdBwd_Timeout)
-                        {
-                            ShowAlarm("1022");
-                        }
-                        else
-                        {
-                            step.INC_TIMES_10();
-                        }
-
-                        nHomeCnt = 0;
-                    }
+                    F_INC_STEP();
                 }
                 else
                 {
-                    step.INC_TIMES();
-                }                
+                    if (step.Times >= Configure_List.Nozzle_FwdBwd_Timeout)
+                    {
+                        ShowAlarm("1022");
+                    }
+                    else
+                    {
+                        step.INC_TIMES_10();
+                    }
+                }
             }
         }
 
@@ -480,26 +350,20 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Flag = true;
                 step.Layer = nStep;
             }
-        }
+        }        
 
-        private void P_CYLINDER_Delay(int nTime)
+        private void F_PROCESS_ALL_VALVE_CLOSE()
         {
-            if (step.Flag)
-            {
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (step.Times > nTime)
-                {
-                    F_INC_STEP();
-                }
-                else
-                {
-                    step.INC_TIMES();
-                }                
-            }
+            // Air
+            Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Water
+            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Curtain air
+            Global.SetDigValue((int)DigOutputList.CH2_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
         #endregion
         /////////////////////////////////////////////////////////////////////////////////////

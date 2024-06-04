@@ -51,27 +51,23 @@ namespace PKGSawKit_CleanerSystem_New
             Top = 0;
             Left = 0;
 
-            m_servoBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0Servo, textBoxAxis1Servo, textBoxAxis2Servo };
-            m_runStsBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0Runsts, textBoxAxis1Runsts, textBoxAxis2Runsts };            
-            m_limitStsBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0Limit, textBoxAxis1Limit, textBoxAxis2Limit };
-            m_actSpdBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0SpeedCur, textBoxAxis1SpeedCur, textBoxAxis2SpeedCur };
-            m_setSpdBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0SpeedSet, textBoxAxis1SpeedSet, textBoxAxis2SpeedSet };
-            m_actAccelBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0AccelCur, textBoxAxis1AccelCur, textBoxAxis2AccelCur };
-            m_setAccelBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0AccelSet, textBoxAxis1AccelSet, textBoxAxis2AccelSet };
-            m_actDecelBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0DecelCur, textBoxAxis1DecelCur, textBoxAxis2DecelCur };
-            m_setDecelBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0DecelSet, textBoxAxis1DecelSet, textBoxAxis2DecelSet };
-            m_actGearBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0GearCur, textBoxAxis1GearCur, textBoxAxis2GearCur };
-            m_setGearBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0GearSet, textBoxAxis1GearSet, textBoxAxis2GearSet };
-            m_actPositionBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0PositionCur, textBoxAxis1PositionCur, textBoxAxis2PositionCur };
-            m_setPositionBox = new TextBox[(int)MotionDefine.Axis_max - 1] { textBoxAxis0PositionSet, textBoxAxis1PositionSet, textBoxAxis2PositionSet };
+            m_servoBox = new TextBox[1] { textBoxAxis0Servo };
+            m_runStsBox = new TextBox[1] { textBoxAxis0Runsts };            
+            m_limitStsBox = new TextBox[1] { textBoxAxis0Limit };
+            m_actSpdBox = new TextBox[1] { textBoxAxis0SpeedCur };
+            m_setSpdBox = new TextBox[1] { textBoxAxis0SpeedSet };
+            m_actAccelBox = new TextBox[1] { textBoxAxis0AccelCur };
+            m_setAccelBox = new TextBox[1] { textBoxAxis0AccelSet };
+            m_actDecelBox = new TextBox[1] { textBoxAxis0DecelCur };
+            m_setDecelBox = new TextBox[1] { textBoxAxis0DecelSet };
+            m_actGearBox = new TextBox[1] { textBoxAxis0GearCur };
+            m_setGearBox = new TextBox[1] { textBoxAxis0GearSet };
+            m_actPositionBox = new TextBox[1] { textBoxAxis0PositionCur };
+            m_setPositionBox = new TextBox[1] { textBoxAxis0PositionSet };
 
             bDisplay = true;
 
-            Value_Init();
-
-            //logdisplayTimer.Interval = 100;
-            //logdisplayTimer.Elapsed += new ElapsedEventHandler(Eventlog_Display);
-            //logdisplayTimer.Start();
+            Value_Init();            
         }
 
         private void SetDoubleBuffered(Control control, bool doubleBuffered = true)
@@ -85,60 +81,39 @@ namespace PKGSawKit_CleanerSystem_New
         }
 
         private void Value_Init()
-        {
-            double dBrushUpDownAcelDecl;
-            double dBrushRotationAcelDecl;
-            double dWaterBlockMoveAcelDecl;
+        {            
+            double dBrushRotationAcelDecl;                                    
+            dBrushRotationAcelDecl = Configure_List.Brush_Rotation_Speed * 2;   
             
-            dBrushUpDownAcelDecl = Configure_List.Brush_UpDown_Speed * 2;
-            dBrushRotationAcelDecl = Configure_List.Brush_Rotation_Speed * 2;
-            dWaterBlockMoveAcelDecl = Configure_List.WaterBlock_Move_Speed * 2;
-
-            MotionClass.SetMotorVelocity(Define.axis_z, Configure_List.Brush_UpDown_Speed);
-            MotionClass.SetMotorVelocity(Define.axis_r, Configure_List.Brush_Rotation_Speed);
-            MotionClass.SetMotorVelocity(Define.axis_y, Configure_List.WaterBlock_Move_Speed);
-
-            MotionClass.SetMotorAccel(Define.axis_z, dBrushUpDownAcelDecl);
+            MotionClass.SetMotorVelocity(Define.axis_r, Configure_List.Brush_Rotation_Speed);            
             MotionClass.SetMotorAccel(Define.axis_r, dBrushRotationAcelDecl);
-            MotionClass.SetMotorAccel(Define.axis_y, dWaterBlockMoveAcelDecl);
-
-            MotionClass.SetMotorDecel(Define.axis_z, dBrushUpDownAcelDecl);
-            MotionClass.SetMotorDecel(Define.axis_r, dBrushRotationAcelDecl);
-            MotionClass.SetMotorDecel(Define.axis_y, dWaterBlockMoveAcelDecl);
-
-            MotionClass.SetMotorGearing(Define.axis_z, 1);
-            MotionClass.SetMotorGearing(Define.axis_r, 1);
-            MotionClass.SetMotorGearing(Define.axis_y, 1);            
+            MotionClass.SetMotorDecel(Define.axis_r, dBrushRotationAcelDecl);                        
+            MotionClass.SetMotorGearing(Define.axis_r, 1);            
         }
 
         public void Display()
         {
-            SetDoubleBuffered(groupBoxAxis0);
-            SetDoubleBuffered(groupBoxAxis1);
-            SetDoubleBuffered(groupBoxAxis2);
+            SetDoubleBuffered(groupBoxAxis0);            
             
             if (bDisplay)
             {
-                for (int nAxis = 0; nAxis < MotionDefine.Axis_max - 1; nAxis++)
-                {
-                    m_servoBox[nAxis].Text = MotionClass.motor[nAxis].sR_ServoStatus;
-                    m_runStsBox[nAxis].Text = MotionClass.motor[nAxis].sR_BusyStatus;                    
-                    m_limitStsBox[nAxis].Text = MotionClass.motor[nAxis].sR_HomeStatus;
-                    m_actSpdBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dR_CmdVelocity);
-                    m_actAccelBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Accel);
-                    m_actDecelBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Decel);
-                    m_actGearBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Gearing);
-                    m_actPositionBox[nAxis].Text = string.Format("{0:0.000}", MotionClass.motor[nAxis].dR_ActPosition_step);
+                m_servoBox[0].Text = MotionClass.motor[0].sR_ServoStatus;
+                m_runStsBox[0].Text = MotionClass.motor[0].sR_BusyStatus;
+                m_limitStsBox[0].Text = MotionClass.motor[0].sR_HomeStatus;
+                m_actSpdBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dR_CmdVelocity);
+                m_actAccelBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Accel);
+                m_actDecelBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Decel);
+                m_actGearBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Gearing);
+                m_actPositionBox[0].Text = string.Format("{0:0.000}", MotionClass.motor[0].dR_ActPosition_step);
 
-                    m_setSpdBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Velocity);
-                    m_setAccelBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Accel);
-                    m_setDecelBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Decel);
-                    m_setGearBox[nAxis].Text = string.Format("{0:0.0}", MotionClass.motor[nAxis].dW_Gearing);
-                    m_setPositionBox[nAxis].Text = string.Format("{0:0.000}", MotionClass.motor[nAxis].dW_Position_mm);
-                }
+                m_setSpdBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Velocity);
+                m_setAccelBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Accel);
+                m_setDecelBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Decel);
+                m_setGearBox[0].Text = string.Format("{0:0.0}", MotionClass.motor[0].dW_Gearing);
+                m_setPositionBox[0].Text = string.Format("{0:0.000}", MotionClass.motor[0].dW_Position_mm);
+                
 
-
-                if (MotionClass.motor[Define.axis_z].sR_ServoStatus == "SVOFF")
+                if (MotionClass.motor[Define.axis_r].sR_ServoStatus == "SVOFF")
                 {
                     if (btnAxis0SVOFF.Enabled != false)
                         btnAxis0SVOFF.Enabled = false;
@@ -153,44 +128,9 @@ namespace PKGSawKit_CleanerSystem_New
 
                     if (btnAxis0SVON.Enabled != false)
                         btnAxis0SVON.Enabled = false;
-                }
+                }                                
 
-                if (MotionClass.motor[Define.axis_r].sR_ServoStatus == "SVOFF")
-                {
-                    if (btnAxis1SVOFF.Enabled != false)
-                        btnAxis1SVOFF.Enabled = false;
-
-                    if (!btnAxis1SVON.Enabled)
-                        btnAxis1SVON.Enabled = true;
-                }
-                else
-                {
-                    if (!btnAxis1SVOFF.Enabled)
-                        btnAxis1SVOFF.Enabled = true;
-
-                    if (btnAxis1SVON.Enabled != false)
-                        btnAxis1SVON.Enabled = false;
-                }
-
-                if (MotionClass.motor[Define.axis_y].sR_ServoStatus == "SVOFF")
-                {
-                    if (btnAxis2SVOFF.Enabled != false)
-                        btnAxis2SVOFF.Enabled = false;
-
-                    if (!btnAxis2SVON.Enabled)
-                        btnAxis2SVON.Enabled = true;
-                }
-                else
-                {
-                    if (!btnAxis2SVOFF.Enabled)
-                        btnAxis2SVOFF.Enabled = true;
-
-                    if (btnAxis2SVON.Enabled != false)
-                        btnAxis2SVON.Enabled = false;
-                }
-
-
-                if (MotionClass.motor[Define.axis_z].sR_BusyStatus == "Moving")
+                if (MotionClass.motor[Define.axis_r].sR_BusyStatus == "Moving")
                 {
                     if (btnAxis0AlarmReset.Enabled != false)
                         btnAxis0AlarmReset.Enabled = false;
@@ -211,55 +151,7 @@ namespace PKGSawKit_CleanerSystem_New
 
                     if (!btnAxis0ZeroSet.Enabled)
                         btnAxis0ZeroSet.Enabled = true;
-                }
-
-                if (MotionClass.motor[Define.axis_r].sR_BusyStatus == "Moving")
-                {
-                    if (btnAxis1AlarmReset.Enabled != false)
-                        btnAxis1AlarmReset.Enabled = false;
-
-                    if (btnAxis1Home.Enabled != false)
-                        btnAxis1Home.Enabled = false;
-
-                    if (btnAxis1ZeroSet.Enabled != false)
-                        btnAxis1ZeroSet.Enabled = false;
-                }
-                else
-                {
-                    if (!btnAxis1AlarmReset.Enabled)
-                        btnAxis1AlarmReset.Enabled = true;
-
-                    if (!btnAxis1Home.Enabled)
-                        btnAxis1Home.Enabled = true;
-
-                    if (!btnAxis1ZeroSet.Enabled)
-                        btnAxis1ZeroSet.Enabled = true;
-                }
-
-                if (MotionClass.motor[Define.axis_y].sR_BusyStatus == "Moving")
-                {
-                    if (btnAxis2AlarmReset.Enabled != false)
-                        btnAxis2AlarmReset.Enabled = false;
-
-                    if (btnAxis2Home.Enabled != false)
-                        btnAxis2Home.Enabled = false;
-
-                    if (btnAxis2ZeroSet.Enabled != false)
-                        btnAxis2ZeroSet.Enabled = false;
-                }
-                else
-                {
-                    if (!btnAxis2AlarmReset.Enabled)
-                        btnAxis2AlarmReset.Enabled = true;
-
-                    if (!btnAxis2Home.Enabled)
-                        btnAxis2Home.Enabled = true;
-
-                    if (!btnAxis2ZeroSet.Enabled)
-                        btnAxis2ZeroSet.Enabled = true;
-                }
-
-                textBoxAxis2Alarm.Text = MotionClass.motor[Define.axis_y].sR_AlarmStatus;
+                }                               
             }                                                           
         }
 

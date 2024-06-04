@@ -45,8 +45,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
 
                     Run_Progress();
-                    Home_Progress();
-                    Clean_Progress();
+                    Home_Progress();                    
 
                     Thread.Sleep(10);
                 }
@@ -194,75 +193,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                             P_BRUSH_CYLINDER_FwdBwd_HomeEnd();
                         }
                         break;                    
-                }
-            }
-        }
-
-        private void Clean_Progress()
-        {
-            if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_CLEAN) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUN))
-            {
-                Thread.Sleep(500);
-                step.Layer = 1;
-                step.Times = 1;
-                step.Flag = true;
-
-                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
-                Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_CLEANING;                
-
-                Global.EventLog("START THE BRUSH CYLINDER CLEANING.", ModuleName, "Event");
-            }
-            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_CLEAN) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
-            {
-                switch (step.Layer)
-                {
-                    case 1:
-                        {
-                            P_BRUSH_CYLINDER_FwdBwd_Home();
-                        }
-                        break;
-
-                    case 2:
-                        {
-                            P_BRUSH_UpDn_Seq("Down");
-                        }
-                        break;
-
-                    case 3:
-                        {
-                            P_BRUSH_Rotation("Run");
-                        }
-                        break;
-
-                    case 4:
-                        {
-                            P_BRUSH_Air_Water_Setting("Open");
-                        }
-                        break;
-
-                    case 5:
-                        {
-                            P_BRUSH_Clean_Timecheck(Configure_List.Brush_Clean_Time);
-                        }
-                        break;
-
-                    case 6:
-                        {
-                            P_BRUSH_Air_Water_Setting("Close");
-                        }
-                        break;
-
-                    case 7:
-                        {
-                            P_BRUSH_Rotation("Stop");
-                        }
-                        break;
-
-                    case 8:
-                        {
-                            P_BRUSH_CleanEnd();
-                        }
-                        break;
                 }
             }
         }
@@ -425,205 +355,18 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Global.EventLog("COMPLETE THE BRUSH CYLINDER HOME.", ModuleName, "Event");           
         }
 
-        private void P_BRUSH_UpDn_Seq(string UpDn)
-        {
-            if (step.Flag)
-            {
-                if (UpDn == "Up")
-                {
-                    Define.seqBrushUpDnMode = Define.MODE_BRUSH_UPDN_UP;
-                    Define.seqBrushUpDnCtrl = Define.CTRL_RUN;
-                    Define.seqBrushUpDnSts = Define.STS_BRUSH_UPDN_IDLE;
-                }
-                else
-                {
-                    Define.seqBrushUpDnMode = Define.MODE_BRUSH_UPDN_DOWN;
-                    Define.seqBrushUpDnCtrl = Define.CTRL_RUN;
-                    Define.seqBrushUpDnSts = Define.STS_BRUSH_UPDN_IDLE;
-                }
-
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (UpDn == "Up")
-                {
-                    if (step.Times > 1)
-                    {
-                        if ((Define.seqBrushUpDnCtrl == Define.CTRL_IDLE) &&
-                            (Define.seqBrushUpDnSts == Define.STS_BRUSH_UPDN_UPEND))
-                        {
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                    else
-                    {
-                        step.INC_TIMES();
-                    }
-                }
-                else
-                {
-                    if (step.Times > 1)
-                    {
-                        if ((Define.seqBrushUpDnCtrl == Define.CTRL_IDLE) &&
-                            (Define.seqBrushUpDnSts == Define.STS_BRUSH_UPDN_DOWNEND))
-                        {
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            step.INC_TIMES();
-                        }
-                    }
-                    else
-                    {
-                        step.INC_TIMES();
-                    }
-                }
-            }
-        }
-
-        private void P_BRUSH_Rotation(string sAction)
-        {
-            if (step.Flag)
-            {
-                if (sAction == "Run")
-                {
-                    double dVel = Configure_List.Brush_Rotation_Speed;
-                    double dAcc = dVel * 2;
-                    double dDec = dVel * 2;
-
-                    MotionClass.MotorJogP(Define.axis_r, dVel, dAcc, dDec);
-                }
-                else
-                {
-                    MotionClass.SetMotorSStop(Define.axis_r);
-                }
-
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (step.Times > 1)
-                {
-                    if (sAction == "Run")
-                    {
-                        if (MotionClass.motor[Define.axis_r].sR_BusyStatus == "Moving")
-                        {
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            if (step.Times >= Configure_List.Brush_Rotation_Timeout)
-                            {
-                                ShowAlarm("1045");
-                            }
-                            else
-                            {
-                                step.INC_TIMES_10();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (MotionClass.motor[Define.axis_r].sR_BusyStatus == "Ready")
-                        {
-                            F_INC_STEP();
-                        }
-                        else
-                        {
-                            if (step.Times >= Configure_List.Brush_Rotation_Timeout)
-                            {
-                                ShowAlarm("1046");
-                            }
-                            else
-                            {
-                                step.INC_TIMES_10();
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    step.INC_TIMES();
-                }
-            }
-        }
-
-        private void P_BRUSH_Air_Water_Setting(string OpCl)
-        {
-            if (step.Flag)
-            {
-                if (OpCl == "Open")
-                {
-                    // Air
-                    Global.SetDigValue((int)DigOutputList.CH1_BrushClean_AirValve_o, (uint)DigitalOffOn.On, ModuleName);                    
-
-                    // Water
-                    Global.SetDigValue((int)DigOutputList.CH1_BrushClean_WaterValve_o, (uint)DigitalOffOn.On, ModuleName);
-                }
-                else
-                {
-                    // Air
-                    Global.SetDigValue((int)DigOutputList.CH1_BrushClean_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
-
-                    // Water
-                    Global.SetDigValue((int)DigOutputList.CH1_BrushClean_WaterValve_o, (uint)DigitalOffOn.Off, ModuleName);
-                }
-
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                F_INC_STEP();
-            }
-        }
-
-        private void P_BRUSH_Clean_Timecheck(int iTime)
-        {
-            if (step.Flag)
-            {
-                Global.EventLog("Check the brush clean time : " + iTime.ToString() + "sec.", ModuleName, "Event");
-
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                if (step.Times >= iTime)
-                {
-                    F_INC_STEP();
-                }
-                else
-                {
-                    step.INC_TIMES();
-                }
-            }
-        }
-
-        private void P_BRUSH_CleanEnd()
-        {
-            Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_IDLE;
-            Define.seqBrushFwBwCtrl = Define.CTRL_IDLE;
-            Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_CLEANEND;
-
-            Global.EventLog("COMPLETE THE BRUSH CLEAN.", ModuleName, "Event");
-        }
-
         private void F_PROCESS_ALL_VALVE_CLOSE()
-        {            
+        {
             // Air
-            Global.SetDigValue((int)DigOutputList.CH1_BrushClean_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);            
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
 
             // Water
-            Global.SetDigValue((int)DigOutputList.CH1_BrushClean_WaterValve_o, (uint)DigitalOffOn.Off, ModuleName);            
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Curtain air
+            Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
         #endregion
         /////////////////////////////////////////////////////////////////////////////////////

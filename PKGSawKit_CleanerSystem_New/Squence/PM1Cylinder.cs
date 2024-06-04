@@ -355,11 +355,15 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private void F_PROCESS_ALL_VALVE_CLOSE()
         {
             // Air
-            Global.SetDigValue((int)DigOutputList.CH1_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
 
             // Water
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_1_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_2_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+
+            // Curtain air
+            Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
         #endregion
         /////////////////////////////////////////////////////////////////////////////////////
