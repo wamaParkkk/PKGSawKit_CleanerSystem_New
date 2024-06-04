@@ -652,7 +652,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Navy;
-            this.label14.Location = new System.Drawing.Point(61, 463);
+            this.label14.Location = new System.Drawing.Point(61, 538);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(176, 25);
             this.label14.TabIndex = 95;
@@ -663,7 +663,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(61, 435);
+            this.label13.Location = new System.Drawing.Point(61, 505);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(116, 25);
             this.label13.TabIndex = 94;
@@ -674,7 +674,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(61, 407);
+            this.label11.Location = new System.Drawing.Point(61, 472);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(204, 25);
             this.label11.TabIndex = 93;
@@ -685,7 +685,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Navy;
-            this.label12.Location = new System.Drawing.Point(61, 379);
+            this.label12.Location = new System.Drawing.Point(61, 439);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(213, 25);
             this.label12.TabIndex = 92;
@@ -696,7 +696,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(61, 351);
+            this.label10.Location = new System.Drawing.Point(61, 406);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(203, 25);
             this.label10.TabIndex = 91;
@@ -705,7 +705,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton15
             // 
             this.rjToggleButton15.AutoSize = true;
-            this.rjToggleButton15.Location = new System.Drawing.Point(10, 466);
+            this.rjToggleButton15.Location = new System.Drawing.Point(10, 541);
             this.rjToggleButton15.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton15.Name = "rjToggleButton15";
             this.rjToggleButton15.OffBackColor = System.Drawing.Color.Gray;
@@ -721,7 +721,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton14
             // 
             this.rjToggleButton14.AutoSize = true;
-            this.rjToggleButton14.Location = new System.Drawing.Point(10, 438);
+            this.rjToggleButton14.Location = new System.Drawing.Point(10, 508);
             this.rjToggleButton14.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton14.Name = "rjToggleButton14";
             this.rjToggleButton14.OffBackColor = System.Drawing.Color.Gray;
@@ -737,7 +737,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton13
             // 
             this.rjToggleButton13.AutoSize = true;
-            this.rjToggleButton13.Location = new System.Drawing.Point(10, 410);
+            this.rjToggleButton13.Location = new System.Drawing.Point(10, 475);
             this.rjToggleButton13.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton13.Name = "rjToggleButton13";
             this.rjToggleButton13.OffBackColor = System.Drawing.Color.Gray;
@@ -753,7 +753,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton12
             // 
             this.rjToggleButton12.AutoSize = true;
-            this.rjToggleButton12.Location = new System.Drawing.Point(10, 382);
+            this.rjToggleButton12.Location = new System.Drawing.Point(10, 442);
             this.rjToggleButton12.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton12.Name = "rjToggleButton12";
             this.rjToggleButton12.OffBackColor = System.Drawing.Color.Gray;
@@ -769,7 +769,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton11
             // 
             this.rjToggleButton11.AutoSize = true;
-            this.rjToggleButton11.Location = new System.Drawing.Point(10, 354);
+            this.rjToggleButton11.Location = new System.Drawing.Point(10, 409);
             this.rjToggleButton11.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton11.Name = "rjToggleButton11";
             this.rjToggleButton11.OffBackColor = System.Drawing.Color.Gray;
@@ -1008,7 +1008,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.Navy;
-            this.label22.Location = new System.Drawing.Point(61, 267);
+            this.label22.Location = new System.Drawing.Point(61, 307);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(213, 25);
             this.label22.TabIndex = 110;
@@ -1017,7 +1017,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton26
             // 
             this.rjToggleButton26.AutoSize = true;
-            this.rjToggleButton26.Location = new System.Drawing.Point(10, 270);
+            this.rjToggleButton26.Location = new System.Drawing.Point(10, 310);
             this.rjToggleButton26.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton26.Name = "rjToggleButton26";
             this.rjToggleButton26.OffBackColor = System.Drawing.Color.Gray;
@@ -1035,7 +1035,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Navy;
-            this.label17.Location = new System.Drawing.Point(61, 239);
+            this.label17.Location = new System.Drawing.Point(61, 274);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(212, 25);
             this.label17.TabIndex = 108;
@@ -1044,7 +1044,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton25
             // 
             this.rjToggleButton25.AutoSize = true;
-            this.rjToggleButton25.Location = new System.Drawing.Point(10, 242);
+            this.rjToggleButton25.Location = new System.Drawing.Point(10, 277);
             this.rjToggleButton25.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton25.Name = "rjToggleButton25";
             this.rjToggleButton25.OffBackColor = System.Drawing.Color.Gray;
@@ -1062,7 +1062,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.Navy;
-            this.label16.Location = new System.Drawing.Point(61, 211);
+            this.label16.Location = new System.Drawing.Point(61, 241);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(217, 25);
             this.label16.TabIndex = 106;
@@ -1071,7 +1071,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton24
             // 
             this.rjToggleButton24.AutoSize = true;
-            this.rjToggleButton24.Location = new System.Drawing.Point(10, 214);
+            this.rjToggleButton24.Location = new System.Drawing.Point(10, 244);
             this.rjToggleButton24.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton24.Name = "rjToggleButton24";
             this.rjToggleButton24.OffBackColor = System.Drawing.Color.Gray;
@@ -1089,7 +1089,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Silver;
-            this.label15.Location = new System.Drawing.Point(61, 183);
+            this.label15.Location = new System.Drawing.Point(61, 208);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(116, 25);
             this.label15.TabIndex = 104;
@@ -1098,7 +1098,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton23
             // 
             this.rjToggleButton23.AutoSize = true;
-            this.rjToggleButton23.Location = new System.Drawing.Point(10, 186);
+            this.rjToggleButton23.Location = new System.Drawing.Point(10, 211);
             this.rjToggleButton23.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton23.Name = "rjToggleButton23";
             this.rjToggleButton23.OffBackColor = System.Drawing.Color.Gray;
@@ -1116,7 +1116,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label52.ForeColor = System.Drawing.Color.Navy;
-            this.label52.Location = new System.Drawing.Point(61, 155);
+            this.label52.Location = new System.Drawing.Point(61, 175);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(208, 25);
             this.label52.TabIndex = 102;
@@ -1127,7 +1127,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label51.AutoSize = true;
             this.label51.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.Navy;
-            this.label51.Location = new System.Drawing.Point(61, 127);
+            this.label51.Location = new System.Drawing.Point(61, 142);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(235, 25);
             this.label51.TabIndex = 100;
@@ -1136,7 +1136,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton17
             // 
             this.rjToggleButton17.AutoSize = true;
-            this.rjToggleButton17.Location = new System.Drawing.Point(10, 522);
+            this.rjToggleButton17.Location = new System.Drawing.Point(10, 607);
             this.rjToggleButton17.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton17.Name = "rjToggleButton17";
             this.rjToggleButton17.OffBackColor = System.Drawing.Color.Gray;
@@ -1154,7 +1154,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.Navy;
-            this.label50.Location = new System.Drawing.Point(61, 99);
+            this.label50.Location = new System.Drawing.Point(61, 109);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(201, 25);
             this.label50.TabIndex = 98;
@@ -1163,7 +1163,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton16
             // 
             this.rjToggleButton16.AutoSize = true;
-            this.rjToggleButton16.Location = new System.Drawing.Point(10, 494);
+            this.rjToggleButton16.Location = new System.Drawing.Point(10, 574);
             this.rjToggleButton16.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton16.Name = "rjToggleButton16";
             this.rjToggleButton16.OffBackColor = System.Drawing.Color.Gray;
@@ -1197,7 +1197,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.Navy;
-            this.label49.Location = new System.Drawing.Point(61, 71);
+            this.label49.Location = new System.Drawing.Point(61, 76);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(208, 25);
             this.label49.TabIndex = 63;
@@ -1206,7 +1206,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton22
             // 
             this.rjToggleButton22.AutoSize = true;
-            this.rjToggleButton22.Location = new System.Drawing.Point(10, 158);
+            this.rjToggleButton22.Location = new System.Drawing.Point(10, 178);
             this.rjToggleButton22.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton22.Name = "rjToggleButton22";
             this.rjToggleButton22.OffBackColor = System.Drawing.Color.Gray;
@@ -1233,7 +1233,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton21
             // 
             this.rjToggleButton21.AutoSize = true;
-            this.rjToggleButton21.Location = new System.Drawing.Point(10, 130);
+            this.rjToggleButton21.Location = new System.Drawing.Point(10, 145);
             this.rjToggleButton21.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton21.Name = "rjToggleButton21";
             this.rjToggleButton21.OffBackColor = System.Drawing.Color.Gray;
@@ -1251,7 +1251,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.Navy;
-            this.label47.Location = new System.Drawing.Point(61, 523);
+            this.label47.Location = new System.Drawing.Point(61, 608);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(182, 25);
             this.label47.TabIndex = 59;
@@ -1260,7 +1260,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton20
             // 
             this.rjToggleButton20.AutoSize = true;
-            this.rjToggleButton20.Location = new System.Drawing.Point(10, 102);
+            this.rjToggleButton20.Location = new System.Drawing.Point(10, 112);
             this.rjToggleButton20.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton20.Name = "rjToggleButton20";
             this.rjToggleButton20.OffBackColor = System.Drawing.Color.Gray;
@@ -1278,7 +1278,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label46.AutoSize = true;
             this.label46.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.ForeColor = System.Drawing.Color.Navy;
-            this.label46.Location = new System.Drawing.Point(61, 495);
+            this.label46.Location = new System.Drawing.Point(61, 575);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(179, 25);
             this.label46.TabIndex = 57;
@@ -1287,7 +1287,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton19
             // 
             this.rjToggleButton19.AutoSize = true;
-            this.rjToggleButton19.Location = new System.Drawing.Point(10, 74);
+            this.rjToggleButton19.Location = new System.Drawing.Point(10, 79);
             this.rjToggleButton19.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton19.Name = "rjToggleButton19";
             this.rjToggleButton19.OffBackColor = System.Drawing.Color.Gray;
@@ -1366,7 +1366,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton6
             // 
             this.rjToggleButton6.AutoSize = true;
-            this.rjToggleButton6.Location = new System.Drawing.Point(10, 214);
+            this.rjToggleButton6.Location = new System.Drawing.Point(10, 244);
             this.rjToggleButton6.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton6.Name = "rjToggleButton6";
             this.rjToggleButton6.OffBackColor = System.Drawing.Color.Gray;
@@ -1384,7 +1384,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.Navy;
-            this.label38.Location = new System.Drawing.Point(61, 183);
+            this.label38.Location = new System.Drawing.Point(61, 208);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(235, 25);
             this.label38.TabIndex = 35;
@@ -1393,7 +1393,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton5
             // 
             this.rjToggleButton5.AutoSize = true;
-            this.rjToggleButton5.Location = new System.Drawing.Point(10, 186);
+            this.rjToggleButton5.Location = new System.Drawing.Point(10, 211);
             this.rjToggleButton5.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton5.Name = "rjToggleButton5";
             this.rjToggleButton5.OffBackColor = System.Drawing.Color.Gray;
@@ -1411,7 +1411,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.Navy;
-            this.label39.Location = new System.Drawing.Point(61, 211);
+            this.label39.Location = new System.Drawing.Point(61, 241);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(208, 25);
             this.label39.TabIndex = 37;
@@ -1420,7 +1420,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton3
             // 
             this.rjToggleButton3.AutoSize = true;
-            this.rjToggleButton3.Location = new System.Drawing.Point(10, 130);
+            this.rjToggleButton3.Location = new System.Drawing.Point(10, 145);
             this.rjToggleButton3.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton3.Name = "rjToggleButton3";
             this.rjToggleButton3.OffBackColor = System.Drawing.Color.Gray;
@@ -1436,7 +1436,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton7
             // 
             this.rjToggleButton7.AutoSize = true;
-            this.rjToggleButton7.Location = new System.Drawing.Point(10, 242);
+            this.rjToggleButton7.Location = new System.Drawing.Point(10, 277);
             this.rjToggleButton7.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton7.Name = "rjToggleButton7";
             this.rjToggleButton7.OffBackColor = System.Drawing.Color.Gray;
@@ -1452,7 +1452,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton4
             // 
             this.rjToggleButton4.AutoSize = true;
-            this.rjToggleButton4.Location = new System.Drawing.Point(10, 158);
+            this.rjToggleButton4.Location = new System.Drawing.Point(10, 178);
             this.rjToggleButton4.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton4.Name = "rjToggleButton4";
             this.rjToggleButton4.OffBackColor = System.Drawing.Color.Gray;
@@ -1470,7 +1470,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Navy;
-            this.label40.Location = new System.Drawing.Point(61, 239);
+            this.label40.Location = new System.Drawing.Point(61, 274);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(132, 25);
             this.label40.TabIndex = 39;
@@ -1481,7 +1481,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.Navy;
-            this.label36.Location = new System.Drawing.Point(61, 127);
+            this.label36.Location = new System.Drawing.Point(61, 142);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(208, 25);
             this.label36.TabIndex = 31;
@@ -1492,7 +1492,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Navy;
-            this.label37.Location = new System.Drawing.Point(61, 155);
+            this.label37.Location = new System.Drawing.Point(61, 175);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(201, 25);
             this.label37.TabIndex = 33;
@@ -1512,7 +1512,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton10
             // 
             this.rjToggleButton10.AutoSize = true;
-            this.rjToggleButton10.Location = new System.Drawing.Point(10, 326);
+            this.rjToggleButton10.Location = new System.Drawing.Point(10, 376);
             this.rjToggleButton10.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton10.Name = "rjToggleButton10";
             this.rjToggleButton10.OffBackColor = System.Drawing.Color.Gray;
@@ -1528,7 +1528,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton8
             // 
             this.rjToggleButton8.AutoSize = true;
-            this.rjToggleButton8.Location = new System.Drawing.Point(10, 270);
+            this.rjToggleButton8.Location = new System.Drawing.Point(10, 310);
             this.rjToggleButton8.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton8.Name = "rjToggleButton8";
             this.rjToggleButton8.OffBackColor = System.Drawing.Color.Gray;
@@ -1544,7 +1544,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton2
             // 
             this.rjToggleButton2.AutoSize = true;
-            this.rjToggleButton2.Location = new System.Drawing.Point(10, 102);
+            this.rjToggleButton2.Location = new System.Drawing.Point(10, 112);
             this.rjToggleButton2.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton2.Name = "rjToggleButton2";
             this.rjToggleButton2.OffBackColor = System.Drawing.Color.Gray;
@@ -1562,7 +1562,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.Navy;
-            this.label42.Location = new System.Drawing.Point(61, 295);
+            this.label42.Location = new System.Drawing.Point(61, 340);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(212, 25);
             this.label42.TabIndex = 43;
@@ -1573,7 +1573,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.Silver;
-            this.label34.Location = new System.Drawing.Point(61, 71);
+            this.label34.Location = new System.Drawing.Point(61, 76);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(116, 25);
             this.label34.TabIndex = 27;
@@ -1584,7 +1584,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.Navy;
-            this.label35.Location = new System.Drawing.Point(61, 99);
+            this.label35.Location = new System.Drawing.Point(61, 109);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(174, 25);
             this.label35.TabIndex = 29;
@@ -1595,7 +1595,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.Navy;
-            this.label41.Location = new System.Drawing.Point(61, 267);
+            this.label41.Location = new System.Drawing.Point(61, 307);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(217, 25);
             this.label41.TabIndex = 41;
@@ -1606,7 +1606,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.Navy;
-            this.label43.Location = new System.Drawing.Point(61, 323);
+            this.label43.Location = new System.Drawing.Point(61, 373);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(208, 25);
             this.label43.TabIndex = 45;
@@ -1615,7 +1615,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton1
             // 
             this.rjToggleButton1.AutoSize = true;
-            this.rjToggleButton1.Location = new System.Drawing.Point(10, 74);
+            this.rjToggleButton1.Location = new System.Drawing.Point(10, 79);
             this.rjToggleButton1.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton1.Name = "rjToggleButton1";
             this.rjToggleButton1.OffBackColor = System.Drawing.Color.Gray;
@@ -1631,7 +1631,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton9
             // 
             this.rjToggleButton9.AutoSize = true;
-            this.rjToggleButton9.Location = new System.Drawing.Point(10, 298);
+            this.rjToggleButton9.Location = new System.Drawing.Point(10, 343);
             this.rjToggleButton9.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton9.Name = "rjToggleButton9";
             this.rjToggleButton9.OffBackColor = System.Drawing.Color.Gray;
@@ -1649,7 +1649,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(61, 295);
+            this.label8.Location = new System.Drawing.Point(61, 340);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 25);
             this.label8.TabIndex = 106;
@@ -1658,7 +1658,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton27
             // 
             this.rjToggleButton27.AutoSize = true;
-            this.rjToggleButton27.Location = new System.Drawing.Point(10, 298);
+            this.rjToggleButton27.Location = new System.Drawing.Point(10, 343);
             this.rjToggleButton27.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton27.Name = "rjToggleButton27";
             this.rjToggleButton27.OffBackColor = System.Drawing.Color.Gray;
@@ -1676,7 +1676,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label60.AutoSize = true;
             this.label60.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label60.ForeColor = System.Drawing.Color.Navy;
-            this.label60.Location = new System.Drawing.Point(61, 407);
+            this.label60.Location = new System.Drawing.Point(61, 472);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(125, 25);
             this.label60.TabIndex = 103;
@@ -1685,7 +1685,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton31
             // 
             this.rjToggleButton31.AutoSize = true;
-            this.rjToggleButton31.Location = new System.Drawing.Point(10, 410);
+            this.rjToggleButton31.Location = new System.Drawing.Point(10, 475);
             this.rjToggleButton31.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton31.Name = "rjToggleButton31";
             this.rjToggleButton31.OffBackColor = System.Drawing.Color.Gray;
@@ -1703,7 +1703,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label59.AutoSize = true;
             this.label59.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label59.ForeColor = System.Drawing.Color.Navy;
-            this.label59.Location = new System.Drawing.Point(61, 379);
+            this.label59.Location = new System.Drawing.Point(61, 439);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(203, 25);
             this.label59.TabIndex = 101;
@@ -1712,7 +1712,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton30
             // 
             this.rjToggleButton30.AutoSize = true;
-            this.rjToggleButton30.Location = new System.Drawing.Point(10, 382);
+            this.rjToggleButton30.Location = new System.Drawing.Point(10, 442);
             this.rjToggleButton30.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton30.Name = "rjToggleButton30";
             this.rjToggleButton30.OffBackColor = System.Drawing.Color.Gray;
@@ -1730,7 +1730,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label58.AutoSize = true;
             this.label58.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label58.ForeColor = System.Drawing.Color.Navy;
-            this.label58.Location = new System.Drawing.Point(61, 351);
+            this.label58.Location = new System.Drawing.Point(61, 406);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(230, 25);
             this.label58.TabIndex = 99;
@@ -1739,7 +1739,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton29
             // 
             this.rjToggleButton29.AutoSize = true;
-            this.rjToggleButton29.Location = new System.Drawing.Point(10, 354);
+            this.rjToggleButton29.Location = new System.Drawing.Point(10, 409);
             this.rjToggleButton29.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton29.Name = "rjToggleButton29";
             this.rjToggleButton29.OffBackColor = System.Drawing.Color.Gray;
@@ -1757,7 +1757,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.label57.AutoSize = true;
             this.label57.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label57.ForeColor = System.Drawing.Color.Navy;
-            this.label57.Location = new System.Drawing.Point(61, 323);
+            this.label57.Location = new System.Drawing.Point(61, 373);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(225, 25);
             this.label57.TabIndex = 97;
@@ -1766,7 +1766,7 @@ namespace PKGSawKit_CleanerSystem_New
             // rjToggleButton28
             // 
             this.rjToggleButton28.AutoSize = true;
-            this.rjToggleButton28.Location = new System.Drawing.Point(10, 326);
+            this.rjToggleButton28.Location = new System.Drawing.Point(10, 376);
             this.rjToggleButton28.MinimumSize = new System.Drawing.Size(45, 22);
             this.rjToggleButton28.Name = "rjToggleButton28";
             this.rjToggleButton28.OffBackColor = System.Drawing.Color.Gray;
