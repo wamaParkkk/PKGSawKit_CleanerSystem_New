@@ -695,12 +695,12 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Navy;
+            this.label10.ForeColor = System.Drawing.Color.Silver;
             this.label10.Location = new System.Drawing.Point(61, 406);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(203, 25);
+            this.label10.Size = new System.Drawing.Size(116, 25);
             this.label10.TabIndex = 91;
-            this.label10.Text = "[Y11] CH1. Brush fwd";
+            this.label10.Text = "[Y11] Spare";
             // 
             // rjToggleButton15
             // 
@@ -1034,12 +1034,12 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Navy;
+            this.label17.ForeColor = System.Drawing.Color.Silver;
             this.label17.Location = new System.Drawing.Point(61, 274);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(212, 25);
+            this.label17.Size = new System.Drawing.Size(116, 25);
             this.label17.TabIndex = 108;
-            this.label17.Text = "[Y25] CH2. Nozzle fwd";
+            this.label17.Text = "[Y25] Spare";
             // 
             // rjToggleButton25
             // 
@@ -1064,9 +1064,9 @@ namespace PKGSawKit_CleanerSystem_New
             this.label16.ForeColor = System.Drawing.Color.Navy;
             this.label16.Location = new System.Drawing.Point(61, 241);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(217, 25);
+            this.label16.Size = new System.Drawing.Size(235, 25);
             this.label16.TabIndex = 106;
-            this.label16.Text = "[Y24] CH2. Nozzle bwd";
+            this.label16.Text = "[Y24] CH2. Nozzle fw/bw";
             // 
             // rjToggleButton24
             // 
@@ -1561,12 +1561,12 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.Navy;
+            this.label42.ForeColor = System.Drawing.Color.Silver;
             this.label42.Location = new System.Drawing.Point(61, 340);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(212, 25);
+            this.label42.Size = new System.Drawing.Size(116, 25);
             this.label42.TabIndex = 43;
-            this.label42.Text = "[Y09] CH1. Nozzle fwd";
+            this.label42.Text = "[Y09] Spare";
             // 
             // label34
             // 
@@ -1597,9 +1597,9 @@ namespace PKGSawKit_CleanerSystem_New
             this.label41.ForeColor = System.Drawing.Color.Navy;
             this.label41.Location = new System.Drawing.Point(61, 307);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(217, 25);
+            this.label41.Size = new System.Drawing.Size(235, 25);
             this.label41.TabIndex = 41;
-            this.label41.Text = "[Y08] CH1. Nozzle bwd";
+            this.label41.Text = "[Y08] CH1. Nozzle fw/bw";
             // 
             // label43
             // 
@@ -1608,9 +1608,9 @@ namespace PKGSawKit_CleanerSystem_New
             this.label43.ForeColor = System.Drawing.Color.Navy;
             this.label43.Location = new System.Drawing.Point(61, 373);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(208, 25);
+            this.label43.Size = new System.Drawing.Size(226, 25);
             this.label43.TabIndex = 45;
-            this.label43.Text = "[Y10] CH1. Brush bwd";
+            this.label43.Text = "[Y10] CH1. Brush fw/bw";
             // 
             // rjToggleButton1
             // 

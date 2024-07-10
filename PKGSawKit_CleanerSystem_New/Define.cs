@@ -86,9 +86,8 @@
         CH2_Nozzle_Bwd_i = 19,
         CH2_Nozzle_Home_i = 20,
 
-        Spare21_i = 21,
-
-        EMO_Switch_i = 22,
+        EMO_Rear_i = 21,
+        EMO_Front_i = 22,
         Front_Door_Sensor_i = 23,
         Left_Door_Sensor_i = 24,
         Right_Door_Sensor_i = 25,
@@ -114,10 +113,10 @@
 
         FluorescentLamp_o = 7,
 
-        CH1_Nozzle_Bwd_o = 8,
-        CH1_Nozzle_Fwd_o = 9,
-        CH1_Brush_Bwd_o = 10,
-        CH1_Brush_Fwd_o = 11,
+        CH1_Nozzle_FwdBwd_o = 8,
+        
+        CH1_Brush_FwdBwd_o = 10,
+        
         CH1_Nozzle_Pwr_o = 12,
         CH1_Brush_Pwr_o = 13,
 
@@ -135,8 +134,8 @@
 
         Spare23_o = 23,
 
-        CH2_Nozzle_Bwd_o = 24,
-        CH2_Nozzle_Fwd_o = 25,
+        CH2_Nozzle_FwdBwd_o = 24,
+        
         CH2_Nozzle_Pwr_o = 26,
 
         Spare27_o = 27,
@@ -176,10 +175,10 @@
                 
                 else if (value == "7")      _io_Name = "FluorescentLamp_o";
 
-                else if (value == "8")      _io_Name = "CH1_Nozzle_Bwd_o";
-                else if (value == "9")      _io_Name = "CH1_Nozzle_Fwd_o";
-                else if (value == "10")     _io_Name = "CH1_Brush_Bwd_o";
-                else if (value == "11")     _io_Name = "CH1_Brush_Fwd_o";
+                else if (value == "8")      _io_Name = "CH1_Nozzle_FwdBwd_o";
+                
+                else if (value == "10")     _io_Name = "CH1_Brush_FwdBwd_o";
+                
                 else if (value == "12")     _io_Name = "CH1_Nozzle_Pwr_o";
                 else if (value == "13")     _io_Name = "CH1_Brush_Pwr_o";
 
@@ -197,8 +196,8 @@
 
                 else if (value == "23")     _io_Name = "Spare23_o";
 
-                else if (value == "24")     _io_Name = "CH2_Nozzle_Bwd_o";
-                else if (value == "25")     _io_Name = "CH2_Nozzle_Fwd_o";
+                else if (value == "24")     _io_Name = "CH2_Nozzle_FwdBwd_o";
+                
                 else if (value == "26")     _io_Name = "CH2_Nozzle_Pwr_o";
 
                 else if (value == "27")     _io_Name = "Spare27_o";

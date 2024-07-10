@@ -243,12 +243,20 @@ namespace PKGSawKit_CleanerSystem_New
 
 
             // Output display
-            if (Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_Fwd_o] == "On")
+            if ((Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_Pwr_o] == "On") &&
+                (Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_FwdBwd_o] == "Off"))
+            {
                 textBoxNozzleFwdBwd.Text = "Forward";
-            else if (Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_Bwd_o] == "On")
+            }                
+            else if ((Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_Pwr_o] == "On") &&
+                     (Global.digSet.curDigSet[(int)DigOutputList.CH2_Nozzle_FwdBwd_o] == "On"))
+            {
                 textBoxNozzleFwdBwd.Text = "Backward";
+            }                
             else
+            {
                 textBoxNozzleFwdBwd.Text = "None";
+            }                
 
             if (Global.digSet.curDigSet[(int)DigOutputList.CH2_AirValve_Top_o] != null)
             {
@@ -639,22 +647,18 @@ namespace PKGSawKit_CleanerSystem_New
                         {
                             if (digitalDlg.m_strResult == "None")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);                                
                             }
                             else if (digitalDlg.m_strResult == "Backward")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
-
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.On, ModuleName);
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
                             }
                             else if (digitalDlg.m_strResult == "Forward")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
-
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Fwd_o, (uint)DigitalOffOn.On, ModuleName);
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
+                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
                             }
                         }
                     }

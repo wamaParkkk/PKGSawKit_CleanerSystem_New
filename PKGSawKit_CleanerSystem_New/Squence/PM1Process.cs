@@ -3,6 +3,7 @@ using MsSqlManagerLibrary;
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PKGSawKit_CleanerSystem_New.Squence
@@ -618,8 +619,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                Global.SetDigValue((int)DigOutputList.CH1_Brush_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-                Global.SetDigValue((int)DigOutputList.CH1_Brush_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
 
                 Global.EventLog("Check if brush is used", ModuleName, "Event");
 
@@ -698,9 +699,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private void P_PROCESS_Cylinder_Position_Check(string sAction)
         {
             if (step.Flag)
-            {
-                Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
-
+            {                
                 if (sAction == "Forward")
                 {
                     if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off")
@@ -709,8 +708,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                     else
                     {
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Fwd_o, (uint)DigitalOffOn.On, ModuleName);
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
 
                         step.Flag = false;
                         step.Times = 1;
@@ -724,8 +723,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                     else
                     {
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Bwd_o, (uint)DigitalOffOn.On, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
+                        Thread.Sleep(500);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
                         step.Flag = false;
                         step.Times = 1;
@@ -738,8 +738,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off")
                     {
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Fwd_o, (uint)DigitalOffOn.Off, ModuleName);
-                        
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
                         Thread.Sleep(500);
 
                         F_INC_STEP();
@@ -760,8 +760,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off")
                     {
-                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Bwd_o, (uint)DigitalOffOn.Off, ModuleName);
-
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                        Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
                         Thread.Sleep(500);
 
                         F_INC_STEP();

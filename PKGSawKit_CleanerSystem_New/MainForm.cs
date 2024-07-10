@@ -584,7 +584,8 @@ namespace PKGSawKit_CleanerSystem_New
             if ((Define.seqCtrl[(byte)MODULE._PM1] == Define.CTRL_ALARM) ||
                 (Define.seqCtrl[(byte)MODULE._PM2] == Define.CTRL_ALARM) ||
 
-                (Global.GetDigValue((int)DigInputList.EMO_Switch_i) == "Off"))
+                (Global.GetDigValue((int)DigInputList.EMO_Front_i) == "Off") ||
+                (Global.GetDigValue((int)DigInputList.EMO_Rear_i) == "Off"))
             {
                 if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Red_o] != null)
                 {
