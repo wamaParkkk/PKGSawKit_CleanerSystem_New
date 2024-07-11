@@ -495,8 +495,7 @@ namespace PKGSawKit_CleanerSystem_New
             // Interlock이 해제 상태인지 체크
             if (!Define.bInterlockRelease)
             {
-                if ((GetDigValue((int)DigInputList.EMO_Front_i) == "Off") ||
-                    (GetDigValue((int)DigInputList.EMO_Rear_i) == "Off"))
+                if (GetDigValue((int)DigInputList.EMO_Front_i) == "Off")                    
                 {
                     ALL_VALVE_CLOSE();
                     PROCESS_ABORT();
@@ -727,8 +726,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }                            
@@ -749,8 +747,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }                            
@@ -763,8 +760,7 @@ namespace PKGSawKit_CleanerSystem_New
                     }
                     else
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }
@@ -781,8 +777,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }
@@ -795,8 +790,7 @@ namespace PKGSawKit_CleanerSystem_New
                     }
                     else
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")
                         {
                             return true;
                         }
@@ -872,8 +866,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }
@@ -894,8 +887,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }
@@ -908,8 +900,7 @@ namespace PKGSawKit_CleanerSystem_New
                     }
                     else
                     {
-                        if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                            (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+                        if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                            
                         {
                             return true;
                         }
@@ -935,8 +926,7 @@ namespace PKGSawKit_CleanerSystem_New
                 return true;
             }
 
-            if ((GetDigValue((int)DigInputList.EMO_Front_i) == "On") &&
-                (GetDigValue((int)DigInputList.EMO_Rear_i) == "On"))
+            if (GetDigValue((int)DigInputList.EMO_Front_i) == "On")                
             {
                 return true;
             }

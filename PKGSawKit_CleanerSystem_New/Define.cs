@@ -86,7 +86,8 @@
         CH2_Nozzle_Bwd_i = 19,
         CH2_Nozzle_Home_i = 20,
 
-        EMO_Rear_i = 21,
+        Spare21_i = 21,
+
         EMO_Front_i = 22,
         Front_Door_Sensor_i = 23,
         Left_Door_Sensor_i = 24,
