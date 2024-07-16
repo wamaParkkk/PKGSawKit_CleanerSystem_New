@@ -290,7 +290,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off")
+                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "On")
                 {
                     F_INC_STEP();
                 }
@@ -305,7 +305,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             }
             else
             {
-                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off")
+                if (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "On")
                 {
                     Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                     Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
