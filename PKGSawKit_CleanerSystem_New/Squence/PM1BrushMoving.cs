@@ -209,7 +209,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 if (FwdBwd == "Forward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On")
                     {
                         F_INC_STEP();
                     }
@@ -224,7 +224,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else if (FwdBwd == "Backward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On")
                     {
                         F_INC_STEP();
                     }
@@ -242,7 +242,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 if (FwdBwd == "Forward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On")
                     {
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
@@ -265,7 +265,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On")
                     {
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
@@ -307,7 +307,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off")
+                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On")
                 {
                     F_INC_STEP();
                 }
@@ -322,7 +322,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             }
             else
             {
-                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off")
+                if (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On")
                 {
                     Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                     Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);

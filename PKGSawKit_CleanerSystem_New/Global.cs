@@ -809,8 +809,8 @@ namespace PKGSawKit_CleanerSystem_New
                     {
                         if (digSet.curDigSet[(int)DigOutputList.CH1_Brush_Pwr_o] == "On")
                         {
-                            if ((GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off") &&
-                                (GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "On"))
+                            if ((GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On") &&
+                                (GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off"))
                             {
                                 return true;
                             }
@@ -828,9 +828,9 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
-                        if ((GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On") &&
-                            (GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On") &&
-                            (GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off"))
+                        if ((GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off") &&
+                            (GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off") &&
+                            (GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On"))
                         {
                             return true;
                         }

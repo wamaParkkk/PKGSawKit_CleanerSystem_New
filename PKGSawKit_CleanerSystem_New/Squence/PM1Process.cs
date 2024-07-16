@@ -702,7 +702,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {                
                 if (sAction == "Forward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On")
                     {
                         F_INC_STEP();
                     }
@@ -717,7 +717,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else if (sAction == "Backward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "On")
                     {
                         F_INC_STEP();
                     }
@@ -736,7 +736,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 if (sAction == "Forward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On")
                     {
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
@@ -758,7 +758,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else if (sAction == "Backward")
                 {
-                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off")
+                    if (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "On")
                     {
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);

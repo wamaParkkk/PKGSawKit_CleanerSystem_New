@@ -190,9 +190,9 @@ namespace PKGSawKit_CleanerSystem_New
             textBoxProcessEndTime.Text = Global.prcsInfo.prcsEndTime[module];
 
             // Input display           
-            if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off") &&
-                (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On") &&
-                (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On"))
+            if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On") &&
+                (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off") &&
+                (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off"))
             {
                 if (PM1BrushFwdSns.BackColor != Color.Lime)
                     PM1BrushFwdSns.BackColor = Color.Lime;
@@ -203,9 +203,9 @@ namespace PKGSawKit_CleanerSystem_New
                 if (PM1BrushHomeSns.BackColor != Color.Silver)
                     PM1BrushHomeSns.BackColor = Color.Silver;
             }
-            else if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off") &&
-                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On"))
+            else if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On") &&
+                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off"))
             {
                 if (PM1BrushFwdSns.BackColor != Color.Silver)
                     PM1BrushFwdSns.BackColor = Color.Silver;
@@ -216,9 +216,9 @@ namespace PKGSawKit_CleanerSystem_New
                 if (PM1BrushHomeSns.BackColor != Color.Silver)
                     PM1BrushHomeSns.BackColor = Color.Silver;
             }
-            else if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "Off"))
+            else if ((Global.GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On"))
             {
                 if (PM1BrushFwdSns.BackColor != Color.Silver)
                     PM1BrushFwdSns.BackColor = Color.Silver;
@@ -241,8 +241,8 @@ namespace PKGSawKit_CleanerSystem_New
                     PM1BrushHomeSns.BackColor = Color.Silver;
             }
 
-            if ((Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off") &&
-                (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "On"))                
+            if ((Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On") &&
+                (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off"))                
             {
                 if (PM1NozzleFwdSns.BackColor != Color.Lime)
                     PM1NozzleFwdSns.BackColor = Color.Lime;
@@ -250,8 +250,8 @@ namespace PKGSawKit_CleanerSystem_New
                 if (PM1NozzleBwdSns.BackColor != Color.Silver)
                     PM1NozzleBwdSns.BackColor = Color.Silver;                
             }
-            else if ((Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off"))
+            else if ((Global.GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "On"))
             {
                 if (PM1NozzleFwdSns.BackColor != Color.Silver)
                     PM1NozzleFwdSns.BackColor = Color.Silver;

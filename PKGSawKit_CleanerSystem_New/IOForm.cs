@@ -65,36 +65,14 @@ namespace PKGSawKit_CleanerSystem_New
         {            
             for (int i = 0; i < Define.CH_MAX; i++)
             {
-                if ((i == (int)DigInputList.CH1_Brush_Fwd_i) ||
-                    (i == (int)DigInputList.CH1_Brush_Bwd_i) ||
-                    (i == (int)DigInputList.CH1_Brush_Home_i) ||
-                    (i == (int)DigInputList.CH1_Nozzle_Fwd_i) ||
-                    (i == (int)DigInputList.CH1_Nozzle_Bwd_i) ||
-
-                    (i == (int)DigInputList.CH2_Nozzle_Fwd_i) ||
-                    (i == (int)DigInputList.CH2_Nozzle_Bwd_i) ||
-                    (i == (int)DigInputList.CH2_Nozzle_Home_i))
+                if (Global.GetDigValue(i) == "On")
                 {
-                    if (Global.GetDigValue(i) == "Off")
-                    {
-                        m_diBox[i].BackColor = Color.Lime;
-                    }
-                    else
-                    {
-                        m_diBox[i].BackColor = Color.DimGray;
-                    }
+                    m_diBox[i].BackColor = Color.Lime;
                 }
                 else
                 {
-                    if (Global.GetDigValue(i) == "On")
-                    {
-                        m_diBox[i].BackColor = Color.Lime;
-                    }
-                    else
-                    {
-                        m_diBox[i].BackColor = Color.DimGray;
-                    }
-                }                
+                    m_diBox[i].BackColor = Color.DimGray;
+                }
             }
 
             for (int i = 0; i < Define.CH_MAX; i++)

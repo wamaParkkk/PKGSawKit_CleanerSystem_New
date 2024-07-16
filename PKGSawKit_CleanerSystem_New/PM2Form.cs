@@ -190,9 +190,9 @@ namespace PKGSawKit_CleanerSystem_New
             textBoxProcessEndTime.Text = Global.prcsInfo.prcsEndTime[module];
 
             // Input display                        
-            if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "Off") &&
-                (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "On") &&
-                (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "On"))
+            if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "On") &&
+                (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "Off") &&
+                (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off"))
             {
                 if (PM2NozzleFwdSns.BackColor != Color.Lime)
                     PM2NozzleFwdSns.BackColor = Color.Lime;
@@ -203,9 +203,9 @@ namespace PKGSawKit_CleanerSystem_New
                 if (PM2NozzleHomeSns.BackColor != Color.Silver)
                     PM2NozzleHomeSns.BackColor = Color.Silver;
             }
-            else if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "Off") &&
-                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "On"))
+            else if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "On") &&
+                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off"))
             {
                 if (PM2NozzleFwdSns.BackColor != Color.Silver)
                     PM2NozzleFwdSns.BackColor = Color.Silver;
@@ -216,9 +216,9 @@ namespace PKGSawKit_CleanerSystem_New
                 if (PM2NozzleHomeSns.BackColor != Color.Silver)
                     PM2NozzleHomeSns.BackColor = Color.Silver;
             }
-            else if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "On") &&
-                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "Off"))
+            else if ((Global.GetDigValue((int)DigInputList.CH2_Nozzle_Fwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Bwd_i) == "Off") &&
+                     (Global.GetDigValue((int)DigInputList.CH2_Nozzle_Home_i) == "On"))
             {
                 if (PM2NozzleFwdSns.BackColor != Color.Silver)
                     PM2NozzleFwdSns.BackColor = Color.Silver;
