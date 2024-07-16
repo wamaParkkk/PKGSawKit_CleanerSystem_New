@@ -931,8 +931,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 // Water
                 if (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "On")
                 {                    
-                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);                    
 
                     checkFlag.WaterFlag = true;
                 }
@@ -1080,8 +1079,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);            
 
             // Water
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
-            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+            Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);            
 
             // Curtain air
             Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
@@ -1097,8 +1095,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
             if ((checkFlag.WaterFlag) && (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "Off"))
             {
-                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
-                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);                
             }            
         }      
         

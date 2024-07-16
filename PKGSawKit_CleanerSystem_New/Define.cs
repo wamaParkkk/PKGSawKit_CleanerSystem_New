@@ -109,7 +109,9 @@
         CH1_AirValve_Top_o = 2,
         CH1_AirValve_Bot_o = 3,
         CH1_WaterValve_Top_o = 4,
-        CH1_WaterValve_Bot_o = 5,
+        
+        Spare5_o = 5,
+        
         CH1_Curtain_AirValve_o = 6,
 
         FluorescentLamp_o = 7,
@@ -130,7 +132,9 @@
         CH2_AirValve_Top_o = 18,
         CH2_AirValve_Bot_o = 19,
         CH2_WaterValve_Top_o = 20,
-        CH2_WaterValve_Bot_o = 21,
+        
+        Spare21_o = 21,
+        
         CH2_Curtain_AirValve_o = 22,
 
         Spare23_o = 23,

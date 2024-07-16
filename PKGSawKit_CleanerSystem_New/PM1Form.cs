@@ -372,20 +372,8 @@ namespace PKGSawKit_CleanerSystem_New
                     textBoxWaterTop.Text = "Close";
                     textBoxWaterTop.BackColor = Color.WhiteSmoke;
                 }
-
-                if (Global.digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Bot_o] == "On")
-                {
-                    textBoxWaterBot.Text = "Open";
-                    textBoxWaterBot.BackColor = Color.LightSkyBlue;
-                }
-                else
-                {
-                    textBoxWaterBot.Text = "Close";
-                    textBoxWaterBot.BackColor = Color.WhiteSmoke;
-                }
-
-                if ((Global.digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Top_o] == "On") ||
-                    (Global.digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Bot_o] == "On"))
+                
+                if (Global.digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Top_o] == "On")                    
                 {
                     if (!PM1Water1_1.Visible)
                         PM1Water1_1.Visible = true;
@@ -629,24 +617,7 @@ namespace PKGSawKit_CleanerSystem_New
                             }
                         }
                     }
-                    break;
-
-                case "5":
-                    {
-                        digitalDlg.Init("Close", "Open", "CH1 Bottom Water valve");
-                        if (digitalDlg.ShowDialog() == DialogResult.OK)
-                        {
-                            if (digitalDlg.m_strResult == "Close")
-                            {
-                                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
-                            }
-                            else
-                            {
-                                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
-                            }
-                        }
-                    }
-                    break;
+                    break;                
 
                 case "6":
                     {

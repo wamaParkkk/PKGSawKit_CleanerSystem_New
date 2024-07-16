@@ -47,11 +47,11 @@ namespace PKGSawKit_CleanerSystem_New
             this.textBoxRecipeName = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBoxWaterBot = new System.Windows.Forms.TextBox();
             this.textBoxWaterTop = new System.Windows.Forms.TextBox();
-            this.label16513 = new System.Windows.Forms.Label();
             this.label17123 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxCurtainAir = new System.Windows.Forms.TextBox();
+            this.label1123 = new System.Windows.Forms.Label();
             this.textBoxAirBot = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.textBoxAirTop = new System.Windows.Forms.TextBox();
@@ -91,8 +91,6 @@ namespace PKGSawKit_CleanerSystem_New
             this.PM1BrushBwdSns = new System.Windows.Forms.Label();
             this.label712 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxCurtainAir = new System.Windows.Forms.TextBox();
-            this.label1123 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -344,9 +342,7 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBoxWaterBot);
             this.groupBox4.Controls.Add(this.textBoxWaterTop);
-            this.groupBox4.Controls.Add(this.label16513);
             this.groupBox4.Controls.Add(this.label17123);
             this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(984, 333);
@@ -355,22 +351,6 @@ namespace PKGSawKit_CleanerSystem_New
             this.groupBox4.TabIndex = 307;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Water Sol";
-            // 
-            // textBoxWaterBot
-            // 
-            this.textBoxWaterBot.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBoxWaterBot.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxWaterBot.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxWaterBot.Location = new System.Drawing.Point(59, 55);
-            this.textBoxWaterBot.Name = "textBoxWaterBot";
-            this.textBoxWaterBot.ReadOnly = true;
-            this.textBoxWaterBot.Size = new System.Drawing.Size(100, 27);
-            this.textBoxWaterBot.TabIndex = 265;
-            this.textBoxWaterBot.TabStop = false;
-            this.textBoxWaterBot.Tag = "5";
-            this.textBoxWaterBot.Text = "--";
-            this.textBoxWaterBot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxWaterBot.Click += new System.EventHandler(this.Digital_Click);
             // 
             // textBoxWaterTop
             // 
@@ -387,15 +367,6 @@ namespace PKGSawKit_CleanerSystem_New
             this.textBoxWaterTop.Text = "--";
             this.textBoxWaterTop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxWaterTop.Click += new System.EventHandler(this.Digital_Click);
-            // 
-            // label16513
-            // 
-            this.label16513.AutoSize = true;
-            this.label16513.Location = new System.Drawing.Point(6, 59);
-            this.label16513.Name = "label16513";
-            this.label16513.Size = new System.Drawing.Size(54, 17);
-            this.label16513.TabIndex = 266;
-            this.label16513.Text = "Bottom";
             // 
             // label17123
             // 
@@ -421,6 +392,30 @@ namespace PKGSawKit_CleanerSystem_New
             this.groupBox3.TabIndex = 306;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Air Sol";
+            // 
+            // textBoxCurtainAir
+            // 
+            this.textBoxCurtainAir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.textBoxCurtainAir.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCurtainAir.Location = new System.Drawing.Point(59, 88);
+            this.textBoxCurtainAir.Name = "textBoxCurtainAir";
+            this.textBoxCurtainAir.ReadOnly = true;
+            this.textBoxCurtainAir.Size = new System.Drawing.Size(100, 27);
+            this.textBoxCurtainAir.TabIndex = 267;
+            this.textBoxCurtainAir.TabStop = false;
+            this.textBoxCurtainAir.Tag = "6";
+            this.textBoxCurtainAir.Text = "--";
+            this.textBoxCurtainAir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCurtainAir.Click += new System.EventHandler(this.Digital_Click);
+            // 
+            // label1123
+            // 
+            this.label1123.AutoSize = true;
+            this.label1123.Location = new System.Drawing.Point(6, 93);
+            this.label1123.Name = "label1123";
+            this.label1123.Size = new System.Drawing.Size(53, 17);
+            this.label1123.TabIndex = 268;
+            this.label1123.Text = "Curtain";
             // 
             // textBoxAirBot
             // 
@@ -892,30 +887,6 @@ namespace PKGSawKit_CleanerSystem_New
             this.label5.TabIndex = 486;
             this.label5.Text = "Brush\r\nhome";
             // 
-            // textBoxCurtainAir
-            // 
-            this.textBoxCurtainAir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxCurtainAir.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCurtainAir.Location = new System.Drawing.Point(59, 88);
-            this.textBoxCurtainAir.Name = "textBoxCurtainAir";
-            this.textBoxCurtainAir.ReadOnly = true;
-            this.textBoxCurtainAir.Size = new System.Drawing.Size(100, 27);
-            this.textBoxCurtainAir.TabIndex = 267;
-            this.textBoxCurtainAir.TabStop = false;
-            this.textBoxCurtainAir.Tag = "6";
-            this.textBoxCurtainAir.Text = "--";
-            this.textBoxCurtainAir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCurtainAir.Click += new System.EventHandler(this.Digital_Click);
-            // 
-            // label1123
-            // 
-            this.label1123.AutoSize = true;
-            this.label1123.Location = new System.Drawing.Point(6, 93);
-            this.label1123.Name = "label1123";
-            this.label1123.Size = new System.Drawing.Size(53, 17);
-            this.label1123.TabIndex = 268;
-            this.label1123.Text = "Curtain";
-            // 
             // PM1Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -993,8 +964,6 @@ namespace PKGSawKit_CleanerSystem_New
         private System.Windows.Forms.TextBox textBoxProcessEndTime;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label16513;
-        private System.Windows.Forms.TextBox textBoxWaterBot;
         private System.Windows.Forms.Label label17123;
         private System.Windows.Forms.TextBox textBoxWaterTop;
         private System.Windows.Forms.GroupBox groupBox3;

@@ -1126,12 +1126,12 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.label51.AutoSize = true;
             this.label51.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ForeColor = System.Drawing.Color.Navy;
+            this.label51.ForeColor = System.Drawing.Color.Silver;
             this.label51.Location = new System.Drawing.Point(61, 142);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(235, 25);
+            this.label51.Size = new System.Drawing.Size(116, 25);
             this.label51.TabIndex = 100;
-            this.label51.Text = "[Y21] CH2. Bottom water";
+            this.label51.Text = "[Y21] Spare";
             // 
             // rjToggleButton17
             // 
@@ -1383,12 +1383,12 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Navy;
+            this.label38.ForeColor = System.Drawing.Color.Silver;
             this.label38.Location = new System.Drawing.Point(61, 208);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(235, 25);
+            this.label38.Size = new System.Drawing.Size(116, 25);
             this.label38.TabIndex = 35;
-            this.label38.Text = "[Y05] CH1. Bottom water";
+            this.label38.Text = "[Y05] Spare";
             // 
             // rjToggleButton5
             // 

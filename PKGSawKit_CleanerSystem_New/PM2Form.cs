@@ -340,21 +340,9 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     textBoxWaterTop.Text = "Close";
                     textBoxWaterTop.BackColor = Color.WhiteSmoke;
-                }
+                }                
 
-                if (Global.digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Bot_o] == "On")
-                {
-                    textBoxWaterBot.Text = "Open";
-                    textBoxWaterBot.BackColor = Color.LightSkyBlue;
-                }
-                else
-                {
-                    textBoxWaterBot.Text = "Close";
-                    textBoxWaterBot.BackColor = Color.WhiteSmoke;
-                }
-
-                if ((Global.digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Top_o] == "On") ||
-                    (Global.digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Bot_o] == "On"))
+                if (Global.digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Top_o] == "On")                    
                 {
                     if (!PM2Water1.Visible)
                         PM2Water1.Visible = true;
@@ -605,24 +593,7 @@ namespace PKGSawKit_CleanerSystem_New
                         }
                     }
                     break;
-
-                case "21":
-                    {
-                        digitalDlg.Init("Close", "Open", "CH2 Bottom Water valve");
-                        if (digitalDlg.ShowDialog() == DialogResult.OK)
-                        {
-                            if (digitalDlg.m_strResult == "Close")
-                            {
-                                Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
-                            }
-                            else
-                            {
-                                Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
-                            }
-                        }
-                    }
-                    break;
-
+                
                 case "22":
                     {
                         digitalDlg.Init("Close", "Open", "CH2 Curtain Air Valve");

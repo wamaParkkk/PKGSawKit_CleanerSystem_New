@@ -682,11 +682,8 @@ namespace PKGSawKit_CleanerSystem_New
 
 
             // CH1~2 Water sol valve open 체크
-            if ((digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Top_o] == "On") ||
-                (digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Bot_o] == "On") ||                
-
-                (digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Top_o] == "On") ||
-                (digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Bot_o] == "On"))
+            if ((digSet.curDigSet[(int)DigOutputList.CH1_WaterValve_Top_o] == "On") ||                
+                (digSet.curDigSet[(int)DigOutputList.CH2_WaterValve_Top_o] == "On"))
             {
                 if (digSet.curDigSet[(int)DigOutputList.Hot_Water_Pump_o] != "On")
                 {
@@ -721,8 +718,7 @@ namespace PKGSawKit_CleanerSystem_New
                 if ((ioName == (int)DigOutputList.CH1_AirValve_Top_o) ||                    
                     (ioName == (int)DigOutputList.CH1_AirValve_Bot_o) ||
 
-                    (ioName == (int)DigOutputList.CH1_WaterValve_Top_o) ||
-                    (ioName == (int)DigOutputList.CH1_WaterValve_Bot_o))                    
+                    (ioName == (int)DigOutputList.CH1_WaterValve_Top_o))
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
@@ -861,8 +857,7 @@ namespace PKGSawKit_CleanerSystem_New
                 if ((ioName == (int)DigOutputList.CH2_AirValve_Top_o) ||
                     (ioName == (int)DigOutputList.CH2_AirValve_Bot_o) ||
 
-                    (ioName == (int)DigOutputList.CH2_WaterValve_Top_o) ||
-                    (ioName == (int)DigOutputList.CH2_WaterValve_Bot_o))
+                    (ioName == (int)DigOutputList.CH2_WaterValve_Top_o))                    
                 {
                     if (setValue == (uint)DigitalOffOn.On)
                     {
@@ -941,14 +936,12 @@ namespace PKGSawKit_CleanerSystem_New
         {            
             SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.Off, "PM1");
             SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.Off, "PM1");
-            SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, "PM1");            
-            SetDigValue((int)DigOutputList.CH1_WaterValve_Bot_o, (uint)DigitalOffOn.Off, "PM1");            
+            SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, "PM1");                        
             
 
             SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.Off, "PM2");
             SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.Off, "PM2");
-            SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.Off, "PM2");
-            SetDigValue((int)DigOutputList.CH2_WaterValve_Bot_o, (uint)DigitalOffOn.Off, "PM2");
+            SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.Off, "PM2");            
 
 
             SetDigValue((int)DigOutputList.Hot_Water_Pump_o, (uint)DigitalOffOn.Off, "PM1");
