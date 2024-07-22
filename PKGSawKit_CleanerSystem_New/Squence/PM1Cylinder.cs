@@ -45,6 +45,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     Run_Progress();
                     Home_Progress();
+                    FWD_Progress();
+                    BWD_Progress();
 
                     Thread.Sleep(10);
                 }
@@ -193,6 +195,74 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
             }
         }
+
+        private void FWD_Progress()
+        {
+            if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_FWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUN))
+            {
+                Thread.Sleep(500);
+                step.Layer = 1;
+                step.Times = 1;
+                step.Flag = true;
+
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
+                Define.seqCylinderSts[module] = Define.STS_CYLINDER_FWDING;
+                step.Times = 1;
+
+                Global.EventLog("START THE CYLINDER FORWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_FWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
+            {
+                switch (step.Layer)
+                {
+                    case 1:
+                        {
+                            P_CYLINDER_FwdBwd("Forward");
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            P_CYLINDER_FwdBwd_FwdEnd();
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void BWD_Progress()
+        {
+            if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_BWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUN))
+            {
+                Thread.Sleep(500);
+                step.Layer = 1;
+                step.Times = 1;
+                step.Flag = true;
+
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
+                Define.seqCylinderSts[module] = Define.STS_CYLINDER_BWDING;
+                step.Times = 1;
+
+                Global.EventLog("START THE CYLINDER BACKWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_BWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
+            {
+                switch (step.Layer)
+                {
+                    case 1:
+                        {
+                            P_CYLINDER_FwdBwd("Backward");
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            P_CYLINDER_FwdBwd_BwdEnd();
+                        }
+                        break;
+                }
+            }
+        }
         #endregion
         /////////////////////////////////////////////////////////////////////////////////////
         ///
@@ -284,7 +354,21 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                 }
             }
-        }        
+        }
+
+        private void P_CYLINDER_StepCheck(byte nStep)
+        {
+            if (step.Flag)
+            {
+                step.Flag = false;
+                step.Times = 1;
+            }
+            else
+            {
+                step.Flag = true;
+                step.Layer = nStep;
+            }
+        }
 
         private void P_CYLINDER_FwdBwd_Home()
         {
@@ -326,7 +410,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                 }
             }
-        }
+        }        
 
         private void P_CYLINDER_FwdBwd_HomeEnd()
         {
@@ -337,18 +421,26 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Global.EventLog("COMPLETE THE CYLINDER HOME.", ModuleName, "Event");            
         }
 
-        private void P_CYLINDER_StepCheck(byte nStep)
+        private void P_CYLINDER_FwdBwd_FwdEnd()
         {
-            if (step.Flag)
-            {
-                step.Flag = false;
-                step.Times = 1;
-            }
-            else
-            {
-                step.Flag = true;
-                step.Layer = nStep;
-            }
+            Define.seqCylinderMode[module] = Define.MODE_CYLINDER_IDLE;
+            Define.seqCylinderCtrl[module] = Define.CTRL_IDLE;
+            Define.seqCylinderSts[module] = Define.STS_CYLINDER_FWDEND;
+
+            Global.EventLog("COMPLETE THE CYLINDER FORWARD.", ModuleName, "Event");
+
+            step.Layer = 1;
+        }
+
+        private void P_CYLINDER_FwdBwd_BwdEnd()
+        {
+            Define.seqCylinderMode[module] = Define.MODE_CYLINDER_IDLE;
+            Define.seqCylinderCtrl[module] = Define.CTRL_IDLE;
+            Define.seqCylinderSts[module] = Define.STS_CYLINDER_BWDEND;
+
+            Global.EventLog("COMPLETE THE CYLINDER BACKWARD.", ModuleName, "Event");
+
+            step.Layer = 1;
         }
 
         private void F_PROCESS_ALL_VALVE_CLOSE()

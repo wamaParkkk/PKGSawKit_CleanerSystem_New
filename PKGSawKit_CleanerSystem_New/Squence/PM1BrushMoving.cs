@@ -45,7 +45,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
 
                     Run_Progress();
-                    Home_Progress();                    
+                    Home_Progress();
+                    FWD_Progress();
+                    BWD_Progress();
 
                     Thread.Sleep(10);
                 }
@@ -193,6 +195,74 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                             P_BRUSH_CYLINDER_FwdBwd_HomeEnd();
                         }
                         break;                    
+                }
+            }
+        }
+
+        private void FWD_Progress()
+        {
+            if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_FWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUN))
+            {
+                Thread.Sleep(500);
+                step.Layer = 1;
+                step.Times = 1;
+                step.Flag = true;
+
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
+                Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_FWDING;
+                step.Times = 1;
+
+                Global.EventLog("START THE BRUSH FORWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_FWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
+            {
+                switch (step.Layer)
+                {
+                    case 1:
+                        {
+                            P_BRUSH_CYLINDER_FwdBwd("Forward");
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            P_BRUSH_CYLINDER_FwdBwd_FwdEnd();
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void BWD_Progress()
+        {
+            if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_BWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUN))
+            {
+                Thread.Sleep(500);
+                step.Layer = 1;
+                step.Times = 1;
+                step.Flag = true;
+
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
+                Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_BWDING;
+                step.Times = 1;
+
+                Global.EventLog("START THE BRUSH BACKWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_BWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
+            {
+                switch (step.Layer)
+                {
+                    case 1:
+                        {
+                            P_BRUSH_CYLINDER_FwdBwd("Backward");
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            P_BRUSH_CYLINDER_FwdBwd_BwdEnd();
+                        }
+                        break;
                 }
             }
         }
@@ -352,6 +422,28 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_HOMEEND;            
 
             Global.EventLog("COMPLETE THE BRUSH CYLINDER HOME.", ModuleName, "Event");           
+        }
+
+        private void P_BRUSH_CYLINDER_FwdBwd_FwdEnd()
+        {
+            Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_IDLE;
+            Define.seqBrushFwBwCtrl = Define.CTRL_IDLE;
+            Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_FWDEND;
+
+            Global.EventLog("COMPLETE THE BRUSH FORWARD.", ModuleName, "Event");
+
+            step.Layer = 1;
+        }
+
+        private void P_BRUSH_CYLINDER_FwdBwd_BwdEnd()
+        {
+            Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_IDLE;
+            Define.seqBrushFwBwCtrl = Define.CTRL_IDLE;
+            Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_BWDEND;
+
+            Global.EventLog("COMPLETE THE BRUSH BACKWARD.", ModuleName, "Event");
+
+            step.Layer = 1;
         }
 
         private void F_PROCESS_ALL_VALVE_CLOSE()

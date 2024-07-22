@@ -81,6 +81,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.PM2NozzleHomeSns = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBoxNozzleFwdBwd = new System.Windows.Forms.TextBox();
+            this.btnCylinderStop = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -735,7 +736,7 @@ namespace PKGSawKit_CleanerSystem_New
             // 
             this.groupBox6.Controls.Add(this.textBoxNozzleFwdBwd);
             this.groupBox6.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(464, 660);
+            this.groupBox6.Location = new System.Drawing.Point(469, 649);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(140, 57);
             this.groupBox6.TabIndex = 468;
@@ -758,11 +759,31 @@ namespace PKGSawKit_CleanerSystem_New
             this.textBoxNozzleFwdBwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxNozzleFwdBwd.Click += new System.EventHandler(this.Digital_Click);
             // 
+            // btnCylinderStop
+            // 
+            this.btnCylinderStop.BackColor = System.Drawing.Color.White;
+            this.btnCylinderStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCylinderStop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCylinderStop.FlatAppearance.BorderSize = 0;
+            this.btnCylinderStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCylinderStop.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCylinderStop.ForeColor = System.Drawing.Color.Red;
+            this.btnCylinderStop.Location = new System.Drawing.Point(469, 712);
+            this.btnCylinderStop.Name = "btnCylinderStop";
+            this.btnCylinderStop.Size = new System.Drawing.Size(140, 39);
+            this.btnCylinderStop.TabIndex = 488;
+            this.btnCylinderStop.Tag = "";
+            this.btnCylinderStop.Text = "Stop";
+            this.btnCylinderStop.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCylinderStop.UseVisualStyleBackColor = false;
+            this.btnCylinderStop.Click += new System.EventHandler(this.btnCylinderStop_Click);
+            // 
             // PM2Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnCylinderStop);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PM2NozzleHomeSns);
@@ -863,5 +884,6 @@ namespace PKGSawKit_CleanerSystem_New
         private System.Windows.Forms.PictureBox PM2Water1;
         private System.Windows.Forms.PictureBox PM2Air2;
         private System.Windows.Forms.PictureBox PM2Water5;
+        private System.Windows.Forms.Button btnCylinderStop;
     }
 }

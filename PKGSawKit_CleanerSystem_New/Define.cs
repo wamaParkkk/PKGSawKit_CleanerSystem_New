@@ -345,15 +345,21 @@
         public const byte MODE_CYLINDER_IDLE = 0;
         public const byte MODE_CYLINDER_RUN = 1;
         public const byte MODE_CYLINDER_HOME = 2;
+        public const byte MODE_CYLINDER_FWD = 3;
+        public const byte MODE_CYLINDER_BWD = 4;
 
         public const byte STS_CYLINDER_IDLE = 0;
         public const byte STS_CYLINDER_RUNING = 1;
         public const byte STS_CYLINDER_RUNEND = 2;
         public const byte STS_CYLINDER_HOMEING = 3;
         public const byte STS_CYLINDER_HOMEEND = 4;
-        public const byte STS_CYLINDER_ABORTOK = 5;
+        public const byte STS_CYLINDER_FWDING = 5;
+        public const byte STS_CYLINDER_FWDEND = 6;
+        public const byte STS_CYLINDER_BWDING = 7;
+        public const byte STS_CYLINDER_BWDEND = 8;
+        public const byte STS_CYLINDER_ABORTOK = 9;
         /////////////////////////////////////////////////
-        
+
         // PM1 Brush fwd/bwd seq ////////////////////////
         public static byte seqBrushFwBwMode;
         public static byte seqBrushFwBwCtrl;
@@ -361,14 +367,20 @@
 
         public const byte MODE_BRUSH_FWBW_IDLE = 0;
         public const byte MODE_BRUSH_FWBW_RUN = 1;
-        public const byte MODE_BRUSH_FWBW_HOME = 2;        
+        public const byte MODE_BRUSH_FWBW_HOME = 2;
+        public const byte MODE_BRUSH_FWBW_FWD = 3;
+        public const byte MODE_BRUSH_FWBW_BWD = 4;
 
         public const byte STS_BRUSH_FWBW_IDLE = 0;
         public const byte STS_BRUSH_FWBW_RUNING = 1;
         public const byte STS_BRUSH_FWBW_RUNEND = 2;
         public const byte STS_BRUSH_FWBW_HOMEING = 3;
-        public const byte STS_BRUSH_FWBW_HOMEEND = 4;        
-        public const byte STS_BRUSH_FWBW_ABORTOK = 5;
+        public const byte STS_BRUSH_FWBW_HOMEEND = 4;
+        public const byte STS_BRUSH_FWBW_FWDING = 5;
+        public const byte STS_BRUSH_FWBW_FWDEND = 6;
+        public const byte STS_BRUSH_FWBW_BWDING = 7;
+        public const byte STS_BRUSH_FWBW_BWDEND = 8;
+        public const byte STS_BRUSH_FWBW_ABORTOK = 9;
         /////////////////////////////////////////////////
 
 

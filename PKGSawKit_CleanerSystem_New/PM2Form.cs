@@ -613,28 +613,42 @@ namespace PKGSawKit_CleanerSystem_New
 
                 case "24":
                     {
-                        digitalDlg.Init2("None", "Backward", "Forward", "Nozzle Fwd/Bwd");
+                        digitalDlg.Init2("Home", "Backward", "Forward", "Nozzle Fwd/Bwd");
                         if (digitalDlg.ShowDialog() == DialogResult.OK)
                         {
-                            if (digitalDlg.m_strResult == "None")
+                            if (digitalDlg.m_strResult == "Home")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);                                
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                                Define.seqCylinderMode[module] = Define.MODE_CYLINDER_HOME;
+                                Define.seqCylinderCtrl[module] = Define.CTRL_RUN;
+                                Define.seqCylinderSts[module] = Define.STS_CYLINDER_IDLE;
                             }
                             else if (digitalDlg.m_strResult == "Backward")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
+                                Define.seqCylinderMode[module] = Define.MODE_CYLINDER_BWD;
+                                Define.seqCylinderCtrl[module] = Define.CTRL_RUN;
+                                Define.seqCylinderSts[module] = Define.STS_CYLINDER_IDLE;
                             }
                             else if (digitalDlg.m_strResult == "Forward")
                             {
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
-                                Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                                
+                                //Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
+                                Define.seqCylinderMode[module] = Define.MODE_CYLINDER_FWD;
+                                Define.seqCylinderCtrl[module] = Define.CTRL_RUN;
+                                Define.seqCylinderSts[module] = Define.STS_CYLINDER_IDLE;
                             }
                         }
                     }
                     break;
             }
+        }
+
+        private void btnCylinderStop_Click(object sender, EventArgs e)
+        {
+            Define.seqCylinderCtrl[module] = Define.CTRL_ABORT;
         }
 
         private void btnProcess_Click(object sender, EventArgs e)
@@ -781,6 +795,6 @@ namespace PKGSawKit_CleanerSystem_New
                     }
                     break;
             }
-        }
+        }        
     }
 }
