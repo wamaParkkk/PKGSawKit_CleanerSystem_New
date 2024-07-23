@@ -300,8 +300,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     }
                     else
                     {
-                        Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
+                        Thread.Sleep(500);
+                        Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                        
 
                         step.Flag = false;
                         step.Times = 1;
@@ -383,8 +384,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else
                 {
-                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
                     Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
+                    Thread.Sleep(500);
+                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);                    
 
                     step.Flag = false;
                     step.Times = 1;

@@ -175,7 +175,7 @@
                 else if (value == "2")      _io_Name = "CH1_AirValve_Top_o";
                 else if (value == "3")      _io_Name = "CH1_AirValve_Bot_o";
                 else if (value == "4")      _io_Name = "CH1_WaterValve_Top_o";
-                else if (value == "5")      _io_Name = "CH1_WaterValve_Bot_o";
+                else if (value == "5")      _io_Name = "Spare05_o";
                 else if (value == "6")      _io_Name = "CH1_Curtain_AirValve_o";
                 
                 else if (value == "7")      _io_Name = "FluorescentLamp_o";
@@ -196,7 +196,7 @@
                 else if (value == "18")     _io_Name = "CH2_AirValve_Top_o";
                 else if (value == "19")     _io_Name = "CH2_AirValve_Bot_o";
                 else if (value == "20")     _io_Name = "CH2_WaterValve_Top_o";
-                else if (value == "21")     _io_Name = "CH2_WaterValve_Bot_o";
+                else if (value == "21")     _io_Name = "Spare21_o";
                 else if (value == "22")     _io_Name = "CH2_Curtain_AirValve_o";
 
                 else if (value == "23")     _io_Name = "Spare23_o";
