@@ -797,48 +797,7 @@ namespace PKGSawKit_CleanerSystem_New
                             return false;
                         }
                     }
-                }
-                
-                if (ioName == (int)DigOutputList.CH1_Brush_FwdBwd_o)
-                {
-                    if (setValue == (uint)DigitalOffOn.Off)
-                    {
-                        if (digSet.curDigSet[(int)DigOutputList.CH1_Brush_Pwr_o] == "On")
-                        {
-                            if ((GetDigValue((int)DigInputList.CH1_Nozzle_Fwd_i) == "On") &&
-                                (GetDigValue((int)DigInputList.CH1_Nozzle_Bwd_i) == "Off"))
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                retMsg = "Nozzle position is not forward";
-                                EventLog("[INTERLOCK#1] " + "Nozzle position is not forward", ModuleName, "Event");
-                                return false;
-                            }
-                        }                            
-                    }
-                }
-
-                if (ioName == (int)DigOutputList.CH1_Nozzle_FwdBwd_o)
-                {
-                    if (setValue == (uint)DigitalOffOn.On)
-                    {
-                        if ((GetDigValue((int)DigInputList.CH1_Brush_Fwd_i) == "Off") &&
-                            (GetDigValue((int)DigInputList.CH1_Brush_Bwd_i) == "Off") &&
-                            (GetDigValue((int)DigInputList.CH1_Brush_Home_i) == "On"))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            retMsg = "Brush block position is not home";
-                            EventLog("[INTERLOCK#1] " + "Brush block position is not home", ModuleName, "Event");
-
-                            return false;
-                        }
-                    }
-                }
+                }                                
             }            
 
             return true;

@@ -119,6 +119,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
         }
 
+        public void F_HOLD_STEP()
+        {
+            step.Flag = false;
+            step.Times = 1;
+            Define.seqBrushFwBwCtrl = Define.CTRL_HOLD;
+        }
+
         public void F_INC_STEP()
         {
             step.Flag = true;
@@ -140,6 +147,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_RUNING;                
 
                 Global.EventLog("START THE BRUSH CYLINDER MOVING.", ModuleName, "Event");
+            }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_RUN) && (Define.seqBrushFwBwCtrl == Define.CTRL_HOLD))
+            {
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
             }
             else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_RUN) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
             {
@@ -180,6 +191,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE BRUSH CYLINDER HOME.", ModuleName, "Event");
             }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_HOME) && (Define.seqBrushFwBwCtrl == Define.CTRL_HOLD))
+            {
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
+            }
             else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_HOME) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
@@ -214,6 +229,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE BRUSH FORWARD.", ModuleName, "Event");
             }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_FWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_HOLD))
+            {
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
+            }
             else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_FWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
@@ -247,6 +266,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
 
                 Global.EventLog("START THE BRUSH BACKWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_BWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_HOLD))
+            {
+                Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
             }
             else if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_BWD) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUNNING))
             {
@@ -288,8 +311,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }                    
                 }
                 else if (FwdBwd == "Backward")
@@ -302,10 +324,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     {
                         Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
                         Thread.Sleep(500);
-                        Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                        
+                        Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }                    
                 }                
             }
@@ -364,8 +385,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -386,10 +406,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
                     Thread.Sleep(500);
-                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);                    
+                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                    step.Flag = false;
-                    step.Times = 1;
+                    F_HOLD_STEP();
                 }                    
             }
             else
@@ -433,8 +452,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_FWDEND;
 
             Global.EventLog("COMPLETE THE BRUSH FORWARD.", ModuleName, "Event");
-
-            step.Layer = 1;
         }
 
         private void P_BRUSH_CYLINDER_FwdBwd_BwdEnd()
@@ -444,8 +461,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_BWDEND;
 
             Global.EventLog("COMPLETE THE BRUSH BACKWARD.", ModuleName, "Event");
-
-            step.Layer = 1;
         }
 
         private void F_PROCESS_ALL_VALVE_CLOSE()

@@ -116,6 +116,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
         }
 
+        public void F_HOLD_STEP()
+        {
+            step.Flag = false;
+            step.Times = 1;
+            Define.seqCylinderCtrl[module] = Define.CTRL_HOLD;
+        }
+
         public void F_INC_STEP()
         {
             step.Flag = true;
@@ -137,6 +144,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_RUNING;                
 
                 Global.EventLog("START THE CYLINDER MOVING.", ModuleName, "Event");
+            }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_RUN) && (Define.seqCylinderCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
             }
             else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_RUN) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
             {
@@ -177,6 +188,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE CYLINDER HOME.", ModuleName, "Event");
             }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_HOME) && (Define.seqCylinderCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
+            }
             else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_HOME) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
@@ -211,6 +226,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE CYLINDER FORWARD.", ModuleName, "Event");
             }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_FWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
+            }
             else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_FWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
@@ -244,6 +263,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
 
                 Global.EventLog("START THE CYLINDER BACKWARD.", ModuleName, "Event");
+            }
+            else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_BWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
             }
             else if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_BWD) && (Define.seqCylinderCtrl[module] == Define.CTRL_RUNNING))
             {
@@ -285,8 +308,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                        
                         Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }
                 }
                 else if (FwdBwd == "Backward")
@@ -299,10 +321,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     {
                         Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
                         Thread.Sleep(500);
-                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                        
+                        Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }
                 }
             }
@@ -361,8 +382,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if (step.Flag)
             {
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -383,10 +403,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     Global.SetDigValue((int)DigOutputList.CH2_Nozzle_FwdBwd_o, (uint)DigitalOffOn.On, ModuleName);
                     Thread.Sleep(500);
-                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);                    
+                    Global.SetDigValue((int)DigOutputList.CH2_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                    step.Flag = false;
-                    step.Times = 1;
+                    F_HOLD_STEP();
                 }
             }
             else
@@ -430,8 +449,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Define.seqCylinderSts[module] = Define.STS_CYLINDER_FWDEND;
 
             Global.EventLog("COMPLETE THE CYLINDER FORWARD.", ModuleName, "Event");
-
-            step.Layer = 1;
         }
 
         private void P_CYLINDER_FwdBwd_BwdEnd()
@@ -441,8 +458,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             Define.seqCylinderSts[module] = Define.STS_CYLINDER_BWDEND;
 
             Global.EventLog("COMPLETE THE CYLINDER BACKWARD.", ModuleName, "Event");
-
-            step.Layer = 1;
         }
 
         private void F_PROCESS_ALL_VALVE_CLOSE()

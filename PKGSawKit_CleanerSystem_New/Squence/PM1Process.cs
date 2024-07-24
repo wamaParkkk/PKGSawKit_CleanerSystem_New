@@ -164,6 +164,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
         }
 
+        public void F_HOLD_STEP()
+        {
+            step.Flag = false;
+            step.Times = 1;
+            Define.seqCtrl[module] = Define.CTRL_HOLD;
+        }
+
         public void F_INC_STEP()
         {
             step.Flag = true;
@@ -210,6 +217,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, "");
                 HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Process");
+            }
+            else if ((Define.seqMode[module] == Define.MODE_PROCESS) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCtrl[module] = Define.CTRL_RUNNING;
             }
             else if ((Define.seqMode[module] == Define.MODE_PROCESS) && (Define.seqCtrl[module] == Define.CTRL_RUNNING))
             {                
@@ -434,6 +445,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Init");
             }
+            else if ((Define.seqMode[module] == Define.MODE_INIT) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
+            {
+                Define.seqCtrl[module] = Define.CTRL_RUNNING;
+            }
             else if ((Define.seqMode[module] == Define.MODE_INIT) && (Define.seqCtrl[module] == Define.CTRL_RUNNING))
             {
                 switch (step.Layer)
@@ -499,8 +514,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Global.EventLog("Loading the process recipe file.", ModuleName, "Event");
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -624,8 +638,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("Check if brush is used", ModuleName, "Event");
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -677,8 +690,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -711,8 +723,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }
                 }
                 else if (sAction == "Backward")
@@ -727,8 +738,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                         Thread.Sleep(500);
                         Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
 
-                        step.Flag = false;
-                        step.Times = 1;
+                        F_HOLD_STEP();
                     }
                 }                
             }
@@ -797,9 +807,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     MotionClass.SetMotorSStop(Define.axis_r);
                 }
-                
-                step.Flag = false;
-                step.Times = 1;
+
+                F_HOLD_STEP();
             }
             else
             {
@@ -867,10 +876,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     Define.seqBrushFwBwMode = Define.MODE_BRUSH_FWBW_HOME;
                     Define.seqBrushFwBwCtrl = Define.CTRL_RUN;
                     Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_IDLE;                    
-                }                
+                }
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -939,8 +947,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 // Curtain air
                 Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {                
@@ -966,10 +973,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     Define.seqCylinderMode[module] = Define.MODE_CYLINDER_HOME;
                     Define.seqCylinderCtrl[module] = Define.CTRL_RUN;
                     Define.seqCylinderSts[module] = Define.STS_CYLINDER_IDLE;                    
-                }                
+                }
 
-                step.Flag = false;
-                step.Times = 1;                
+                F_HOLD_STEP();
             }
             else
             {
@@ -1005,8 +1011,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Global.EventLog("Check the process time : " + prcsRecipe.ProcessTime[prcsRecipe.StepNum - 1].ToString() + " sec.", ModuleName, "Event");
 
-                step.Flag = false;
-                step.Times = 1;                
+                F_HOLD_STEP();
             }
             else
             {
@@ -1030,8 +1035,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Global.EventLog("Check the End step.", ModuleName, "Event");
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -1113,8 +1117,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 F_PROCESS_ALL_VALVE_CLOSE();
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {
@@ -1128,8 +1131,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Define.seqBrushFwBwCtrl = Define.CTRL_ABORT;
 
-                step.Flag = false;
-                step.Times = 1;
+                F_HOLD_STEP();
             }
             else
             {

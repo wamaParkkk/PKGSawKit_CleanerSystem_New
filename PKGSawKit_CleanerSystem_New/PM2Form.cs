@@ -527,19 +527,9 @@ namespace PKGSawKit_CleanerSystem_New
 
         private void Digital_Click(object sender, EventArgs e)
         {
-            if (!Define.bInterlockRelease)
-            {
-                if ((Define.seqCtrl[module] != Define.CTRL_IDLE) ||
-                    (Define.seqCylinderCtrl[module] != Define.CTRL_IDLE))
-                {
-                    MessageBox.Show("공정 진행 중입니다", "알림");
-                    return;
-                }
-            }
-
-            TextBox btn = (TextBox)sender;
             digitalDlg = new DigitalDlg();
 
+            TextBox btn = (TextBox)sender;            
             string strTmp = btn.Tag.ToString();
             switch (strTmp)
             {                

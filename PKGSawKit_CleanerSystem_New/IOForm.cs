@@ -94,19 +94,8 @@ namespace PKGSawKit_CleanerSystem_New
         }
 
         private void rjToggleButton0_Click(object sender, EventArgs e)
-        {
-            if (!Define.bInterlockRelease)
-            {
-                if ((Define.seqCtrl[(byte)MODULE._PM1] != Define.CTRL_IDLE) ||
-                    (Define.seqCylinderCtrl[(byte)MODULE._PM1] != Define.CTRL_IDLE))
-                {
-                    MessageBox.Show("CH1 공정 진행 중입니다", "알림");
-                    return;
-                }
-            }
-
+        {            
             CheckBox btn = (CheckBox)sender;
-
             int iName = int.Parse(btn.Tag.ToString());
             if (Global.digSet.curDigSet[iName] == "Off")
             {
@@ -119,19 +108,8 @@ namespace PKGSawKit_CleanerSystem_New
         }
 
         private void rjToggleButton18_Click(object sender, EventArgs e)
-        {
-            if (!Define.bInterlockRelease)
-            {
-                if ((Define.seqCtrl[(byte)MODULE._PM2] != Define.CTRL_IDLE) ||
-                    (Define.seqCylinderCtrl[(byte)MODULE._PM2] != Define.CTRL_IDLE))
-                {
-                    MessageBox.Show("CH2 공정 진행 중입니다", "알림");
-                    return;
-                }
-            }
-
+        {            
             CheckBox btn = (CheckBox)sender;
-
             int iName = int.Parse(btn.Tag.ToString());
             if (Global.digSet.curDigSet[iName] == "Off")
             {
