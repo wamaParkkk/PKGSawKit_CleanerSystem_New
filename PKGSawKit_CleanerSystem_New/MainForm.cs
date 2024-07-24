@@ -706,6 +706,7 @@ namespace PKGSawKit_CleanerSystem_New
             
 
             // Process end - buzzer auto off
+            /*
             if (Global.GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
             {
                 if (Global.digSet.curDigSet[(int)DigOutputList.Buzzer_o] != null)
@@ -714,7 +715,7 @@ namespace PKGSawKit_CleanerSystem_New
                         Global.SetDigValue((int)DigOutputList.Buzzer_o, (uint)DigitalOffOn.Off, "PM1");
                 }
             }
-
+            */
             // Daily count init
             string sTime = DateTime.Now.ToString("HH:mm:ss");
             if (sTime == "00:00:00")

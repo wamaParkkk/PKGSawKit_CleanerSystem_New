@@ -152,7 +152,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     btnProcess.Enabled = true;
 
-                    HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Idle");
+                    //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Idle");
                 }                    
 
                 if (btnProcess.BackColor != Color.Transparent)
@@ -715,12 +715,13 @@ namespace PKGSawKit_CleanerSystem_New
                             {
                                 if (!Define.bInterlockRelease)
                                 {
+                                    /*
                                     if (Global.GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
                                     {
                                         MessageBox.Show("Front door가 열려 있습니다", "알림");
                                         return;
                                     }
-
+                                    */
                                     if (Global.GetDigValue((int)DigInputList.Left_Door_Sensor_i) == "Off")
                                     {
                                         MessageBox.Show("Left door가 열려 있습니다", "알림");
@@ -752,12 +753,13 @@ namespace PKGSawKit_CleanerSystem_New
                     {
                         if (!Define.bInterlockRelease)
                         {
+                            /*
                             if (Global.GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Front door가 열려 있습니다", "알림");
                                 return;
                             }
-
+                            */
                             if (Global.GetDigValue((int)DigInputList.Left_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Left door가 열려 있습니다", "알림");
@@ -805,12 +807,13 @@ namespace PKGSawKit_CleanerSystem_New
                     {
                         if (!Define.bInterlockRelease)
                         {
+                            /*
                             if (Global.GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Front door가 열려 있습니다", "알림");
                                 return;
                             }
-
+                            */
                             if (Global.GetDigValue((int)DigInputList.Left_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Left door가 열려 있습니다", "알림");

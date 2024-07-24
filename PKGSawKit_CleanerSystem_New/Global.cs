@@ -269,7 +269,7 @@ namespace PKGSawKit_CleanerSystem_New
             timer.Elapsed += new ElapsedEventHandler(VALUE_INTERLOCK_CHECK);
             timer.Start();
 
-            
+            /*
             string strRtn = HostConnection.Connect();
             if (strRtn == "OK")
             {
@@ -296,7 +296,8 @@ namespace PKGSawKit_CleanerSystem_New
             else
             {
                 MessageBox.Show("EE 서버 접속에 실패했습니다", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }                   
+            }     
+            */
         }
 
         public static void GetDailyLogCount(string moduleName)
@@ -526,7 +527,7 @@ namespace PKGSawKit_CleanerSystem_New
                         sendMsg_System = "Idle";
                     }
                 }
-
+                /*
                 if (GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
                 {
                     if (Define.sInterlockMsg == string.Empty)
@@ -542,7 +543,7 @@ namespace PKGSawKit_CleanerSystem_New
                         }
                     }
                 }
-
+                */
                 if (GetDigValue((int)DigInputList.Left_Door_Sensor_i) == "Off")
                 {
                     if (Define.sInterlockMsg == string.Empty)

@@ -112,8 +112,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
             Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");
 
-            HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
-            HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
+            //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
+            //HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
         }
 
         public void F_HOLD_STEP()
