@@ -178,7 +178,20 @@ namespace PKGSawKit_CleanerSystem_New
 
                 if (btnPM1Init.BackColor != Color.Transparent)
                     btnPM1Init.BackColor = Color.Transparent;
-            }            
+            }
+
+            if ((Define.seqMode[(byte)MODULE._PM1] == Define.MODE_PROCESS) && (Define.seqCtrl[(byte)MODULE._PM1] == Define.CTRL_WAIT))
+            {
+                if (labelCH1ProcessWait.ForeColor == Color.LightGray)
+                    labelCH1ProcessWait.ForeColor = Color.Red;
+                else
+                    labelCH1ProcessWait.ForeColor = Color.LightGray;
+            }
+            else
+            {
+                if (labelCH1ProcessWait.ForeColor != Color.LightGray)
+                    labelCH1ProcessWait.ForeColor = Color.LightGray;
+            }
 
             if (Global.prcsInfo.prcsRecipeName[(byte)MODULE._PM1] != null)
                 textBoxPM1RecipeName.Text = Global.prcsInfo.prcsRecipeName[(byte)MODULE._PM1];
@@ -289,6 +302,17 @@ namespace PKGSawKit_CleanerSystem_New
 
                 if (PM1BrushRotate2.Visible != false)
                     PM1BrushRotate2.Visible = false;
+            }
+
+            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+            {
+                textBoxCH1Door.Text = "Open";
+                textBoxCH1Door.BackColor = Color.OrangeRed;
+            }
+            else if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "On")
+            {
+                textBoxCH1Door.Text = "Close";
+                textBoxCH1Door.BackColor = Color.LightSkyBlue;
             }
 
             if (Global.digSet.curDigSet[(int)DigOutputList.CH1_AirValve_Top_o] != null)
@@ -479,6 +503,19 @@ namespace PKGSawKit_CleanerSystem_New
                     btnPM2Init.BackColor = Color.Transparent;
             }
 
+            if ((Define.seqMode[(byte)MODULE._PM2] == Define.MODE_PROCESS) && (Define.seqCtrl[(byte)MODULE._PM2] == Define.CTRL_WAIT))
+            {
+                if (labelCH2ProcessWait.ForeColor == Color.LightGray)
+                    labelCH2ProcessWait.ForeColor = Color.Red;
+                else
+                    labelCH2ProcessWait.ForeColor = Color.LightGray;
+            }
+            else
+            {
+                if (labelCH2ProcessWait.ForeColor != Color.LightGray)
+                    labelCH2ProcessWait.ForeColor = Color.LightGray;
+            }
+
             if (Global.prcsInfo.prcsRecipeName[(byte)MODULE._PM2] != null)
                 textBoxPM2RecipeName.Text = Global.prcsInfo.prcsRecipeName[(byte)MODULE._PM2];
 
@@ -540,6 +577,17 @@ namespace PKGSawKit_CleanerSystem_New
 
                 if (PM2NozzleHomeSns.BackColor != Color.Silver)
                     PM2NozzleHomeSns.BackColor = Color.Silver;
+            }
+
+            if (Global.GetDigValue((int)DigInputList.CH2_Door_Sensor_i) == "Off")
+            {
+                textBoxCH2Door.Text = "Open";
+                textBoxCH2Door.BackColor = Color.OrangeRed;
+            }
+            else if (Global.GetDigValue((int)DigInputList.CH2_Door_Sensor_i) == "On")
+            {
+                textBoxCH2Door.Text = "Close";
+                textBoxCH2Door.BackColor = Color.LightSkyBlue;
             }
 
             if (Global.digSet.curDigSet[(int)DigOutputList.CH2_AirValve_Top_o] != null)

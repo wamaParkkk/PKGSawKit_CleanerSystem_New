@@ -11,6 +11,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         Thread thread;
         private new TStep step;
         Alarm_List alarm_List;  // Alarm list
+        private bool bWaitSet;
 
         public PM1BrushMoving()
         {
@@ -42,6 +43,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     else if (Define.seqBrushFwBwCtrl == Define.CTRL_RETRY)
                     {
                         AlarmAction("Retry");
+                    }
+                    else if (Define.seqBrushFwBwCtrl == Define.CTRL_WAIT)
+                    {
+                        AlarmAction("Wait");
                     }
 
                     Run_Progress();
@@ -83,6 +88,20 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;                
 
                 Global.EventLog("Brush cylinder movement stopped : " + sAction, ModuleName, "Event");
+            }
+            else if (sAction == "Wait")
+            {
+                if (!bWaitSet)
+                {
+                    bWaitSet = true;
+
+                    Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_Brush_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
+
+                    MotionClass.SetMotorSStop(Define.axis_r);
+
+                    Global.EventLog("Brush Cylinder movement stopped : " + sAction, ModuleName, "Event");
+                }
             }
         }
 
@@ -143,6 +162,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
                 step.Flag = true;
 
+                bWaitSet = false;
+
                 Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
                 Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_RUNING;                
 
@@ -186,6 +207,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
                 step.Flag = true;
 
+                bWaitSet = false;
+
                 Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
                 Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_HOMEING;                
 
@@ -222,6 +245,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Layer = 1;
                 step.Times = 1;
                 step.Flag = true;
+
+                bWaitSet = false;
 
                 Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
                 Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_FWDING;
@@ -260,6 +285,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Layer = 1;
                 step.Times = 1;
                 step.Flag = true;
+
+                bWaitSet = false;
 
                 Define.seqBrushFwBwCtrl = Define.CTRL_RUNNING;
                 Define.seqBrushFwBwSts = Define.STS_BRUSH_FWBW_BWDING;

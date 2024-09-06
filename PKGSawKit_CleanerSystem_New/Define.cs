@@ -74,8 +74,9 @@
         Water_Level_High_i = 9,
         Water_Level_Low_i = 10,
 
-        Spare11_i = 11,
-        Spare12_i = 12,
+        CH1_Door_Sensor_i = 11,
+        CH2_Door_Sensor_i = 12,
+
         Spare13_i = 13,
         Spare14_i = 14,
         Spare15_i = 15,
@@ -327,7 +328,8 @@
         public const byte CTRL_ALARM = 3;
         public const byte CTRL_RETRY = 4;
         public const byte CTRL_HOLD = 5;
-        public const byte CTRL_ABORT = 6;
+        public const byte CTRL_WAIT = 6;
+        public const byte CTRL_ABORT = 7;
 
         public const byte STS_IDLE = 0;
         public const byte STS_PROCESS_ING = 1;

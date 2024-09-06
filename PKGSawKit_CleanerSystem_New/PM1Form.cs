@@ -175,7 +175,20 @@ namespace PKGSawKit_CleanerSystem_New
 
                 if (btnInit.BackColor != Color.Transparent)
                     btnInit.BackColor = Color.Transparent;
-            }            
+            }
+
+            if ((Define.seqMode[module] == Define.MODE_PROCESS) && (Define.seqCtrl[module] == Define.CTRL_WAIT))
+            {
+                if (labelProcessWait.ForeColor == Color.LightGray)
+                    labelProcessWait.ForeColor = Color.Red;
+                else
+                    labelProcessWait.ForeColor = Color.LightGray;
+            }
+            else
+            {
+                if (labelProcessWait.ForeColor != Color.LightGray)
+                    labelProcessWait.ForeColor = Color.LightGray;
+            }
 
             // Process recipe 정보
             if (Global.prcsInfo.prcsRecipeName[module] != null)
@@ -287,6 +300,17 @@ namespace PKGSawKit_CleanerSystem_New
 
                 if (PM1BrushRotate2.Visible != false)
                     PM1BrushRotate2.Visible = false;
+            }
+
+            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+            {
+                textBoxDoor.Text = "Open";
+                textBoxDoor.BackColor = Color.OrangeRed;
+            }
+            else if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "On")
+            {
+                textBoxDoor.Text = "Close";
+                textBoxDoor.BackColor = Color.LightSkyBlue;
             }
 
             // Output display            
@@ -631,6 +655,12 @@ namespace PKGSawKit_CleanerSystem_New
                         digitalDlg.Init("Backward", "Forward", "CH1 Cylinder Fwd/Bwd");
                         if (digitalDlg.ShowDialog() == DialogResult.OK)
                         {
+                            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+                            {
+                                MessageBox.Show("Chamber door is opened", "Notification");
+                                return;
+                            }
+
                             if (digitalDlg.m_strResult == "Backward")
                             {
                                 //Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.On, ModuleName);
@@ -656,6 +686,12 @@ namespace PKGSawKit_CleanerSystem_New
                         digitalDlg.Init2("Home", "Backward", "Forward", "CH1 Brush Fwd/Bwd");
                         if (digitalDlg.ShowDialog() == DialogResult.OK)
                         {
+                            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+                            {
+                                MessageBox.Show("Chamber door is opened", "Notification");
+                                return;
+                            }
+
                             if (digitalDlg.m_strResult == "Home")
                             {
                                 //Global.SetDigValue((int)DigOutputList.CH1_Brush_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
@@ -739,6 +775,12 @@ namespace PKGSawKit_CleanerSystem_New
                                         MessageBox.Show("Back door가 열려 있습니다", "알림");
                                         return;
                                     }
+
+                                    if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+                                    {
+                                        MessageBox.Show("Chamber door is opened", "Notification");
+                                        return;
+                                    }
                                 }
 
                                 Define.seqMode[module] = Define.MODE_PROCESS;
@@ -775,6 +817,12 @@ namespace PKGSawKit_CleanerSystem_New
                             if (Global.GetDigValue((int)DigInputList.Back_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Back door가 열려 있습니다", "알림");
+                                return;
+                            }
+
+                            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+                            {
+                                MessageBox.Show("Chamber door is opened", "Notification");
                                 return;
                             }
                         }
@@ -829,6 +877,12 @@ namespace PKGSawKit_CleanerSystem_New
                             if (Global.GetDigValue((int)DigInputList.Back_Door_Sensor_i) == "Off")
                             {
                                 MessageBox.Show("Back door가 열려 있습니다", "알림");
+                                return;
+                            }
+
+                            if (Global.GetDigValue((int)DigInputList.CH1_Door_Sensor_i) == "Off")
+                            {
+                                MessageBox.Show("Chamber door is opened", "Notification");
                                 return;
                             }
                         }

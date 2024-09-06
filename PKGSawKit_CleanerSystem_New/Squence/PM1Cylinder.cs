@@ -10,6 +10,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         Thread thread;
         private new TStep step;
         Alarm_List alarm_List;  // Alarm list
+        private bool bWaitSet;
 
         public PM1Cylinder()
         {
@@ -41,6 +42,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     else if (Define.seqCylinderCtrl[module] == Define.CTRL_RETRY)
                     {
                         AlarmAction("Retry");
+                    }
+                    else if (Define.seqCylinderCtrl[module] == Define.CTRL_WAIT)
+                    {
+                        AlarmAction("Wait");
                     }
 
                     Run_Progress();
@@ -82,6 +87,18 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;                
 
                 Global.EventLog("Cylinder movement stopped : " + sAction, ModuleName, "Event");
+            }
+            else if (sAction == "Wait")
+            {
+                if (!bWaitSet)
+                {
+                    bWaitSet = true;
+
+                    Global.SetDigValue((int)DigOutputList.CH1_Nozzle_Pwr_o, (uint)DigitalOffOn.Off, ModuleName);
+                    Global.SetDigValue((int)DigOutputList.CH1_Nozzle_FwdBwd_o, (uint)DigitalOffOn.Off, ModuleName);
+
+                    Global.EventLog("Cylinder movement stopped : " + sAction, ModuleName, "Event");
+                }
             }
         }
 
@@ -140,6 +157,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
                 step.Flag = true;
 
+                bWaitSet = false;
+
                 Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_RUNING;                
 
@@ -183,6 +202,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Times = 1;
                 step.Flag = true;
 
+                bWaitSet = false;
+
                 Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_HOMEING;                
 
@@ -219,6 +240,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Layer = 1;
                 step.Times = 1;
                 step.Flag = true;
+
+                bWaitSet = false;
 
                 Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_FWDING;
@@ -257,6 +280,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 step.Layer = 1;
                 step.Times = 1;
                 step.Flag = true;
+
+                bWaitSet = false;
 
                 Define.seqCylinderCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqCylinderSts[module] = Define.STS_CYLINDER_BWDING;

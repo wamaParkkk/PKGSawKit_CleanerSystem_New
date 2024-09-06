@@ -32,7 +32,9 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private new TStep step;
         TPrcsRecipe prcsRecipe; // Recipe struct
         TCheckFlag checkFlag;
-        Alarm_List alarm_List;  // Alarm list                
+        Alarm_List alarm_List;  // Alarm list
+ 
+        private bool bWaitSet;
 
         public PM1Process()
         {
@@ -71,6 +73,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     else if (Define.seqCtrl[module] == Define.CTRL_RETRY)
                     {
                         AlarmAction("Retry");
+                    }
+                    else if (Define.seqCtrl[module] == Define.CTRL_WAIT)
+                    {
+                        AlarmAction("Wait");
                     }
 
                     Process_Progress();
@@ -133,6 +139,21 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepCurrentTime[module] = 1;                
 
                 Global.EventLog("Process has stopped : " + sAction, ModuleName, "Event");                
+            }
+            else if (sAction == "Wait")
+            {
+                if (!bWaitSet)
+                {
+                    F_PROCESS_ALL_VALVE_CLOSE();
+
+                    bWaitSet = true;
+
+                    // Brush를 동작하기 위해 Cylinder(Water/Air)를 Fwd/Bwd를 시키는데, Cylinder쓰레드를 안쓰고 Process쓰레드에서 직접 IO셋팅하기 때문에..
+                    if ((step.Layer == 11) || (step.Layer == 22))
+                        step.Flag = true;
+
+                    Global.EventLog("Process has stopped : " + sAction, ModuleName, "Event");
+                }
             }
         }
 
@@ -208,7 +229,11 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepCurrentTime[module] = 1;
                 Global.prcsInfo.prcsStepTotalTime[module] = 0;
                 Global.prcsInfo.prcsEndTime[module] = string.Empty;
-                                
+
+                checkFlag.AirFlag = false;
+                checkFlag.WaterFlag = false;
+
+                bWaitSet = false;
 
                 Define.seqCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqSts[module] = Define.STS_PROCESS_ING;
@@ -932,7 +957,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 {
                     Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
                     Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
-
                     checkFlag.AirFlag = true;
                 }                
 
@@ -940,7 +964,6 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 if (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "On")
                 {                    
                     Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);                    
-
                     checkFlag.WaterFlag = true;
                 }
 
@@ -1020,7 +1043,11 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     F_INC_STEP();
                 }
                 else
-                {                    
+                {
+                    // Wait 후 Running시 (Door open -> close), IO동작 재 셋팅
+                    if (bWaitSet)
+                        F_WAIT_IO_DESETTING();
+
                     step.INC_TIMES();
                     
                     // Ui에 표시 할 시간
@@ -1101,8 +1128,26 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);                
             }            
-        }      
-        
+        }
+
+        private void F_WAIT_IO_DESETTING()
+        {
+            bWaitSet = false;
+
+            if (checkFlag.AirFlag)
+            {
+                Global.SetDigValue((int)DigOutputList.CH1_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH1_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
+            }
+
+            if (checkFlag.WaterFlag)
+            {
+                Global.SetDigValue((int)DigOutputList.CH1_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+            }
+
+            Global.SetDigValue((int)DigOutputList.CH1_Curtain_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
+        }
+
         private void F_DAILY_COUNT()
         {            
             Define.iPM1DailyCnt++;

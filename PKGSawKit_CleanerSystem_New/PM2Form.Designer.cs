@@ -82,6 +82,9 @@ namespace PKGSawKit_CleanerSystem_New
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBoxNozzleFwdBwd = new System.Windows.Forms.TextBox();
             this.btnCylinderStop = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labelProcessWait = new System.Windows.Forms.Label();
+            this.textBoxDoor = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -99,6 +102,7 @@ namespace PKGSawKit_CleanerSystem_New
             ((System.ComponentModel.ISupportInitialize)(this.PM2Water5)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -778,11 +782,50 @@ namespace PKGSawKit_CleanerSystem_New
             this.btnCylinderStop.UseVisualStyleBackColor = false;
             this.btnCylinderStop.Click += new System.EventHandler(this.btnCylinderStop_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.labelProcessWait);
+            this.groupBox2.Controls.Add(this.textBoxDoor);
+            this.groupBox2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(858, 654);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(172, 96);
+            this.groupBox2.TabIndex = 491;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Door sensor";
+            // 
+            // labelProcessWait
+            // 
+            this.labelProcessWait.AutoSize = true;
+            this.labelProcessWait.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProcessWait.ForeColor = System.Drawing.Color.LightGray;
+            this.labelProcessWait.Location = new System.Drawing.Point(6, 54);
+            this.labelProcessWait.Name = "labelProcessWait";
+            this.labelProcessWait.Size = new System.Drawing.Size(156, 32);
+            this.labelProcessWait.TabIndex = 264;
+            this.labelProcessWait.Text = "Process wait";
+            // 
+            // textBoxDoor
+            // 
+            this.textBoxDoor.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxDoor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.textBoxDoor.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDoor.Location = new System.Drawing.Point(6, 24);
+            this.textBoxDoor.Name = "textBoxDoor";
+            this.textBoxDoor.ReadOnly = true;
+            this.textBoxDoor.Size = new System.Drawing.Size(153, 27);
+            this.textBoxDoor.TabIndex = 263;
+            this.textBoxDoor.TabStop = false;
+            this.textBoxDoor.Tag = "0";
+            this.textBoxDoor.Text = "--";
+            this.textBoxDoor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // PM2Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnCylinderStop);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label5);
@@ -826,6 +869,8 @@ namespace PKGSawKit_CleanerSystem_New
             this.panel1.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -885,5 +930,8 @@ namespace PKGSawKit_CleanerSystem_New
         private System.Windows.Forms.PictureBox PM2Air2;
         private System.Windows.Forms.PictureBox PM2Water5;
         private System.Windows.Forms.Button btnCylinderStop;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label labelProcessWait;
+        private System.Windows.Forms.TextBox textBoxDoor;
     }
 }

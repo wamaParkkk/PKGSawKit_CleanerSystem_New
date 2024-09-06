@@ -114,6 +114,12 @@ namespace PKGSawKit_CleanerSystem_New
             this.textBoxWaterHeater = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.textBoxWaterPump = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.labelCH1ProcessWait = new System.Windows.Forms.Label();
+            this.textBoxCH1Door = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelCH2ProcessWait = new System.Windows.Forms.Label();
+            this.textBoxCH2Door = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.PM1_Door_Close.SuspendLayout();
@@ -137,6 +143,8 @@ namespace PKGSawKit_CleanerSystem_New
             ((System.ComponentModel.ISupportInitialize)(this.PM2Water2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PM2Water3)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // displayTimer
@@ -329,7 +337,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.textBoxPM2RecipeName);
             this.groupBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(478, 12);
+            this.groupBox2.Location = new System.Drawing.Point(591, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(329, 187);
             this.groupBox2.TabIndex = 271;
@@ -703,7 +711,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.btnPM2InitStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPM2InitStop.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPM2InitStop.ForeColor = System.Drawing.Color.Red;
-            this.btnPM2InitStop.Location = new System.Drawing.Point(813, 159);
+            this.btnPM2InitStop.Location = new System.Drawing.Point(926, 159);
             this.btnPM2InitStop.Name = "btnPM2InitStop";
             this.btnPM2InitStop.Size = new System.Drawing.Size(65, 40);
             this.btnPM2InitStop.TabIndex = 424;
@@ -722,7 +730,7 @@ namespace PKGSawKit_CleanerSystem_New
             this.btnPM2Init.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPM2Init.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPM2Init.ForeColor = System.Drawing.Color.Navy;
-            this.btnPM2Init.Location = new System.Drawing.Point(813, 113);
+            this.btnPM2Init.Location = new System.Drawing.Point(926, 113);
             this.btnPM2Init.Name = "btnPM2Init";
             this.btnPM2Init.Size = new System.Drawing.Size(65, 40);
             this.btnPM2Init.TabIndex = 423;
@@ -1201,12 +1209,90 @@ namespace PKGSawKit_CleanerSystem_New
             this.textBoxWaterPump.Text = "--";
             this.textBoxWaterPump.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.labelCH1ProcessWait);
+            this.groupBox4.Controls.Add(this.textBoxCH1Door);
+            this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(403, 11);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(172, 96);
+            this.groupBox4.TabIndex = 478;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "CH1 Door sensor";
+            // 
+            // labelCH1ProcessWait
+            // 
+            this.labelCH1ProcessWait.AutoSize = true;
+            this.labelCH1ProcessWait.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCH1ProcessWait.ForeColor = System.Drawing.Color.LightGray;
+            this.labelCH1ProcessWait.Location = new System.Drawing.Point(6, 54);
+            this.labelCH1ProcessWait.Name = "labelCH1ProcessWait";
+            this.labelCH1ProcessWait.Size = new System.Drawing.Size(156, 32);
+            this.labelCH1ProcessWait.TabIndex = 264;
+            this.labelCH1ProcessWait.Text = "Process wait";
+            // 
+            // textBoxCH1Door
+            // 
+            this.textBoxCH1Door.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxCH1Door.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.textBoxCH1Door.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCH1Door.Location = new System.Drawing.Point(6, 24);
+            this.textBoxCH1Door.Name = "textBoxCH1Door";
+            this.textBoxCH1Door.ReadOnly = true;
+            this.textBoxCH1Door.Size = new System.Drawing.Size(153, 27);
+            this.textBoxCH1Door.TabIndex = 263;
+            this.textBoxCH1Door.TabStop = false;
+            this.textBoxCH1Door.Tag = "0";
+            this.textBoxCH1Door.Text = "--";
+            this.textBoxCH1Door.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.labelCH2ProcessWait);
+            this.groupBox5.Controls.Add(this.textBoxCH2Door);
+            this.groupBox5.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(926, 11);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(172, 96);
+            this.groupBox5.TabIndex = 479;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "CH2 Door sensor";
+            // 
+            // labelCH2ProcessWait
+            // 
+            this.labelCH2ProcessWait.AutoSize = true;
+            this.labelCH2ProcessWait.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCH2ProcessWait.ForeColor = System.Drawing.Color.LightGray;
+            this.labelCH2ProcessWait.Location = new System.Drawing.Point(6, 54);
+            this.labelCH2ProcessWait.Name = "labelCH2ProcessWait";
+            this.labelCH2ProcessWait.Size = new System.Drawing.Size(156, 32);
+            this.labelCH2ProcessWait.TabIndex = 264;
+            this.labelCH2ProcessWait.Text = "Process wait";
+            // 
+            // textBoxCH2Door
+            // 
+            this.textBoxCH2Door.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxCH2Door.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.textBoxCH2Door.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCH2Door.Location = new System.Drawing.Point(6, 24);
+            this.textBoxCH2Door.Name = "textBoxCH2Door";
+            this.textBoxCH2Door.ReadOnly = true;
+            this.textBoxCH2Door.Size = new System.Drawing.Size(153, 27);
+            this.textBoxCH2Door.TabIndex = 263;
+            this.textBoxCH2Door.TabStop = false;
+            this.textBoxCH2Door.Tag = "0";
+            this.textBoxCH2Door.Text = "--";
+            this.textBoxCH2Door.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // OperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1172, 824);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.PM2NozzleHomeSns);
@@ -1274,6 +1360,10 @@ namespace PKGSawKit_CleanerSystem_New
             ((System.ComponentModel.ISupportInitialize)(this.PM2Water3)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1364,5 +1454,11 @@ namespace PKGSawKit_CleanerSystem_New
         private System.Windows.Forms.TextBox textBoxWaterHeater;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.TextBox textBoxWaterPump;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label labelCH1ProcessWait;
+        private System.Windows.Forms.TextBox textBoxCH1Door;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label labelCH2ProcessWait;
+        private System.Windows.Forms.TextBox textBoxCH2Door;
     }
 }

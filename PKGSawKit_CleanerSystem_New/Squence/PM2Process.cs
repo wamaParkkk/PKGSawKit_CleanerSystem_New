@@ -17,12 +17,21 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         public double[] ProcessTime;     // Process time
     }
 
+    struct TCheckFlag2
+    {
+        public bool AirFlag;
+        public bool WaterFlag;
+    }
+
     class PM2Process : TBaseThread
     {
         Thread thread;
         private new TStep step;
         TPrcsRecipe2 prcsRecipe; // Recipe struct
+        TCheckFlag2 checkFlag;
         Alarm_List alarm_List;  // Alarm list        
+
+        private bool bWaitSet;
 
         public PM2Process()
         {
@@ -60,6 +69,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                     else if (Define.seqCtrl[module] == Define.CTRL_RETRY)
                     {
                         AlarmAction("Retry");
+                    }
+                    else if (Define.seqCtrl[module] == Define.CTRL_WAIT)
+                    {
+                        AlarmAction("Wait");
                     }
 
                     Process_Progress();
@@ -118,6 +131,17 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepCurrentTime[module] = 1;
 
                 Global.EventLog("Process has stopped : " + sAction, ModuleName, "Event");
+            }
+            else if (sAction == "Wait")
+            {
+                if (!bWaitSet)
+                {
+                    F_PROCESS_ALL_VALVE_CLOSE();
+
+                    bWaitSet = true;
+
+                    Global.EventLog("Process has stopped : " + sAction, ModuleName, "Event");
+                }
             }
         }
 
@@ -191,7 +215,11 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepCurrentTime[module] = 1;
                 Global.prcsInfo.prcsStepTotalTime[module] = 0;
                 Global.prcsInfo.prcsEndTime[module] = string.Empty;
-                
+
+                checkFlag.AirFlag = false;
+                checkFlag.WaterFlag = false;
+
+                bWaitSet = false;
 
                 Define.seqCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqSts[module] = Define.STS_PROCESS_ING;
@@ -500,22 +528,26 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 if (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "On") // [prcsRecipe.StepNum - 1]이 구조체적으로 현재 Step임
                 {
                     Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
-                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);                    
+                    Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
+                    checkFlag.AirFlag = true;
                 }
                 else
                 {
                     Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
                     Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.Off, ModuleName);
+                    checkFlag.AirFlag = false;
                 }
 
                 // Water
                 if (prcsRecipe.Water[prcsRecipe.StepNum - 1] == "On")
                 {
-                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);                    
+                    Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                    checkFlag.WaterFlag = true;
                 }
                 else
                 {
                     Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.Off, ModuleName);
+                    checkFlag.WaterFlag = false;
                 }
 
                 // Curtain air
@@ -595,6 +627,10 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 }
                 else
                 {
+                    // Wait 후 Running시 (Door open -> close), IO동작 재 셋팅
+                    if (bWaitSet)
+                        F_WAIT_IO_DESETTING();
+
                     step.INC_TIMES();
                     
                     // Ui에 표시 할 시간
@@ -660,7 +696,25 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             // Curtain air
             Global.SetDigValue((int)DigOutputList.CH2_Curtain_AirValve_o, (uint)DigitalOffOn.Off, ModuleName);
         }
-        
+
+        private void F_WAIT_IO_DESETTING()
+        {
+            bWaitSet = false;
+
+            if (checkFlag.AirFlag)
+            {
+                Global.SetDigValue((int)DigOutputList.CH2_AirValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+                Global.SetDigValue((int)DigOutputList.CH2_AirValve_Bot_o, (uint)DigitalOffOn.On, ModuleName);
+            }
+
+            if (checkFlag.WaterFlag)
+            {
+                Global.SetDigValue((int)DigOutputList.CH2_WaterValve_Top_o, (uint)DigitalOffOn.On, ModuleName);
+            }
+
+            Global.SetDigValue((int)DigOutputList.CH2_Curtain_AirValve_o, (uint)DigitalOffOn.On, ModuleName);
+        }
+
         private void F_DAILY_COUNT()
         {
             Define.iPM2DailyCnt++;
