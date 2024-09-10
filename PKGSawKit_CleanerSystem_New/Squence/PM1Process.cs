@@ -984,12 +984,13 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             {
                 if (sAct == "Run")
                 {
-                    if ((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_IDLE) && (Define.seqCylinderCtrl[module] == Define.CTRL_IDLE))
+                    if (((Define.seqCylinderMode[module] == Define.MODE_CYLINDER_IDLE) && (Define.seqCylinderCtrl[module] == Define.CTRL_IDLE)) ||
+                         (Define.seqCylinderCtrl[module] == Define.CTRL_WAIT))
                     {
                         Define.seqCylinderMode[module] = Define.MODE_CYLINDER_RUN;
                         Define.seqCylinderCtrl[module] = Define.CTRL_RUN;
                         Define.seqCylinderSts[module] = Define.STS_CYLINDER_IDLE;
-                    }                    
+                    }
                 }
                 else
                 {

@@ -62,16 +62,30 @@ namespace PKGSawKit_CleanerSystem_New
         }
 
         private void DI_Parsing_timer_Tick(object sender, EventArgs e)
-        {            
+        {
             for (int i = 0; i < Define.CH_MAX; i++)
             {
-                if (Global.GetDigValue(i) == "On")
+                if (i == 10)
                 {
-                    m_diBox[i].BackColor = Color.Lime;
+                    if (Global.GetDigValue(i) == "Off")
+                    {
+                        m_diBox[i].BackColor = Color.Lime;
+                    }
+                    else
+                    {
+                        m_diBox[i].BackColor = Color.DimGray;
+                    }
                 }
                 else
                 {
-                    m_diBox[i].BackColor = Color.DimGray;
+                    if (Global.GetDigValue(i) == "On")
+                    {
+                        m_diBox[i].BackColor = Color.Lime;
+                    }
+                    else
+                    {
+                        m_diBox[i].BackColor = Color.DimGray;
+                    }
                 }
             }
 
