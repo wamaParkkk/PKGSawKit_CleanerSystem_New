@@ -158,6 +158,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         {
             if ((Define.seqBrushFwBwMode == Define.MODE_BRUSH_FWBW_RUN) && (Define.seqBrushFwBwCtrl == Define.CTRL_RUN))
             {
+                Thread.Sleep(500);
                 step.Layer = 1;
                 step.Times = 1;
                 step.Flag = true;
