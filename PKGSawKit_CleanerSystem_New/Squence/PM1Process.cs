@@ -181,8 +181,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
             Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");
 
-            //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
-            //HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
+            HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
+            HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
         }
 
         public void F_HOLD_STEP()
@@ -240,8 +240,8 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE PROCESS.", ModuleName, "Event");
 
-                //HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, "");
-                //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Process");
+                HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, "");
+                HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Process");
             }
             else if ((Define.seqMode[module] == Define.MODE_PROCESS) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
             {
@@ -468,7 +468,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                 Global.EventLog("START THE INITIALIZE.", ModuleName, "Event");
 
-                //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Init");
+                HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Init");
             }
             else if ((Define.seqMode[module] == Define.MODE_INIT) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
             {
@@ -555,7 +555,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     Global.EventLog("Recipe name : " + Global.prcsInfo.prcsRecipeName[module], ModuleName, "Event");
 
-                    //HostConnection.Host_Set_RecipeName(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsRecipeName[module]);
+                    HostConnection.Host_Set_RecipeName(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsRecipeName[module]);
 
                     F_INC_STEP();
                 }
@@ -712,7 +712,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 string strProgressTime = string.Format("{0}/{1}",
                         Global.prcsInfo.prcsCurrentStep[module].ToString(), Global.prcsInfo.prcsTotalStep[module].ToString());
 
-                //HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
+                HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 F_HOLD_STEP();
@@ -949,7 +949,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 string strProgressTime = string.Format("{0}/{1}",
                         Global.prcsInfo.prcsCurrentStep[module].ToString(), Global.prcsInfo.prcsTotalStep[module].ToString());
 
-                //HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
+                HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 // Air
@@ -1090,7 +1090,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
         private void P_PROCESS_ProcessEnd()
         {
             Global.prcsInfo.prcsEndTime[module] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            //HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsEndTime[module]);
+            HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsEndTime[module]);
 
             Define.seqMode[module] = Define.MODE_IDLE;
             Define.seqCtrl[module] = Define.CTRL_IDLE;

@@ -152,7 +152,7 @@ namespace PKGSawKit_CleanerSystem_New
                 {
                     btnProcess.Enabled = true;
 
-                    //HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Idle");
+                    HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Idle");
                 }
 
                 if (btnProcess.BackColor != Color.Transparent)
