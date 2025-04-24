@@ -148,12 +148,8 @@ namespace PKGSawKit_CleanerSystem_New
             }
             else if (Define.seqMode[module] == Define.MODE_IDLE)
             {
-                if (!btnProcess.Enabled)
-                {
-                    btnProcess.Enabled = true;
-
-                    HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Idle");
-                }                    
+                if (!btnProcess.Enabled)                
+                    btnProcess.Enabled = true;                                    
 
                 if (btnProcess.BackColor != Color.Transparent)
                     btnProcess.BackColor = Color.Transparent;

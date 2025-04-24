@@ -179,10 +179,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             alarm_List.alarm_code = almId;
             Define.sAlarmName = alarm_List.alarm_code;
 
-            Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");
-
-            HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
-            HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
+            Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");            
         }
 
         public void F_HOLD_STEP()
@@ -238,10 +235,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Define.seqCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqSts[module] = Define.STS_PROCESS_ING;
 
-                Global.EventLog("START THE PROCESS.", ModuleName, "Event");
-
-                HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, "");
-                HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Process");
+                Global.EventLog("START THE PROCESS.", ModuleName, "Event");                
             }
             else if ((Define.seqMode[module] == Define.MODE_PROCESS) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
             {
@@ -466,9 +460,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Define.seqCtrl[module] = Define.CTRL_RUNNING;
                 Define.seqSts[module] = Define.STS_INIT_ING;
 
-                Global.EventLog("START THE INITIALIZE.", ModuleName, "Event");
-
-                HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Init");
+                Global.EventLog("START THE INITIALIZE.", ModuleName, "Event");                
             }
             else if ((Define.seqMode[module] == Define.MODE_INIT) && (Define.seqCtrl[module] == Define.CTRL_HOLD))
             {
@@ -553,9 +545,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
                     Global.prcsInfo.prcsRecipeName[module] = Define.sSelectRecipeName[module];
 
-                    Global.EventLog("Recipe name : " + Global.prcsInfo.prcsRecipeName[module], ModuleName, "Event");
-
-                    HostConnection.Host_Set_RecipeName(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsRecipeName[module]);
+                    Global.EventLog("Recipe name : " + Global.prcsInfo.prcsRecipeName[module], ModuleName, "Event");                    
 
                     F_INC_STEP();
                 }
@@ -707,14 +697,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepTotalTime[module] = prcsRecipe.ProcessTime[prcsRecipe.StepNum - 1];
 
                 Global.EventLog("Process Step : " + (prcsRecipe.StepNum).ToString(), ModuleName, "Event");
-
-                // 서버에 매 초 경과되는 Process time을 보내려고 했으나, delay소지가 있어 경과되는 Step num을 보내는 것으로 수정 /////
-                string strProgressTime = string.Format("{0}/{1}",
-                        Global.prcsInfo.prcsCurrentStep[module].ToString(), Global.prcsInfo.prcsTotalStep[module].ToString());
-
-                HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+                
                 F_HOLD_STEP();
             }
             else
@@ -944,14 +927,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
                 Global.prcsInfo.prcsStepTotalTime[module] = prcsRecipe.ProcessTime[prcsRecipe.StepNum - 1];
 
                 Global.EventLog("Process Step : " + (prcsRecipe.StepNum).ToString(), ModuleName, "Event");
-
-                // 서버에 매 초 경과되는 Process time을 보내려고 했으나, delay소지가 있어 경과되는 Step num을 보내는 것으로 수정 /////
-                string strProgressTime = string.Format("{0}/{1}",
-                        Global.prcsInfo.prcsCurrentStep[module].ToString(), Global.prcsInfo.prcsTotalStep[module].ToString());
-
-                HostConnection.Host_Set_ProgressTime(Global.hostEquipmentInfo, ModuleName, strProgressTime);
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+                
                 // Air
                 if (prcsRecipe.Air[prcsRecipe.StepNum - 1] == "On") // [prcsRecipe.StepNum - 1]이 구조체적으로 현재 Step임
                 {
@@ -1089,8 +1065,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
 
         private void P_PROCESS_ProcessEnd()
         {
-            Global.prcsInfo.prcsEndTime[module] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            HostConnection.Host_Set_ProcessEndTime(Global.hostEquipmentInfo, ModuleName, Global.prcsInfo.prcsEndTime[module]);
+            Global.prcsInfo.prcsEndTime[module] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");            
 
             Define.seqMode[module] = Define.MODE_IDLE;
             Define.seqCtrl[module] = Define.CTRL_IDLE;

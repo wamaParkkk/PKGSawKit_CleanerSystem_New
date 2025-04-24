@@ -80,6 +80,9 @@ namespace PKGSawKit_CleanerSystem_New
 
             Global.Init();
 
+            // 장비 정보 불러오기
+            EQ_INFO_LOAD();
+
             // 가동 시간 불러오기
             RUNTIME_LOAD();
 
@@ -586,12 +589,16 @@ namespace PKGSawKit_CleanerSystem_New
 
                 (Global.GetDigValue((int)DigInputList.EMO_Front_i) == "Off"))               
             {
-                if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Red_o] != null)
+                if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Red_o] != "On")
                 {
-                    if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Red_o] != "On")
-                        Global.SetDigValue((int)DigOutputList.Tower_Lamp_Red_o, (uint)DigitalOffOn.On, "PM1");
-                    else
-                        Global.SetDigValue((int)DigOutputList.Tower_Lamp_Red_o, (uint)DigitalOffOn.Off, "PM1");
+                    Global.SetDigValue((int)DigOutputList.Tower_Lamp_Red_o, (uint)DigitalOffOn.On, "PM1");
+
+                    HostConnection.Host_Set_Signal(Define.EqType, Define.EqLineCode, Define.EqAsset,
+                        (int)DigitalOffOn.On, (int)DigitalOffOn.Off, (int)DigitalOffOn.Off, (int)DigitalOffOn.Off, Define.EqRemarks1, Define.EqRemarks2, DateTime.Now);
+                }
+                else
+                {
+                    Global.SetDigValue((int)DigOutputList.Tower_Lamp_Red_o, (uint)DigitalOffOn.Off, "PM1");
                 }
 
                 if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Yellow_o] != null)
@@ -625,7 +632,12 @@ namespace PKGSawKit_CleanerSystem_New
                     if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Yellow_o] != null)
                     {
                         if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Yellow_o] != "On")
+                        {
                             Global.SetDigValue((int)DigOutputList.Tower_Lamp_Yellow_o, (uint)DigitalOffOn.On, "PM1");
+
+                            HostConnection.Host_Set_Signal(Define.EqType, Define.EqLineCode, Define.EqAsset,
+                                (int)DigitalOffOn.Off, (int)DigitalOffOn.On, (int)DigitalOffOn.Off, (int)DigitalOffOn.Off, Define.EqRemarks1, Define.EqRemarks2, DateTime.Now);
+                        }
                     }
 
                     if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Green_o] != null)
@@ -654,7 +666,12 @@ namespace PKGSawKit_CleanerSystem_New
                     if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Green_o] != null)
                     {
                         if (Global.digSet.curDigSet[(int)DigOutputList.Tower_Lamp_Green_o] != "On")
-                            Global.SetDigValue((int)DigOutputList.Tower_Lamp_Green_o, (uint)DigitalOffOn.On, "PM1");                        
+                        {
+                            Global.SetDigValue((int)DigOutputList.Tower_Lamp_Green_o, (uint)DigitalOffOn.On, "PM1");
+
+                            HostConnection.Host_Set_Signal(Define.EqType, Define.EqLineCode, Define.EqAsset,
+                                (int)DigitalOffOn.Off, (int)DigitalOffOn.Off, (int)DigitalOffOn.On, (int)DigitalOffOn.Off, Define.EqRemarks1, Define.EqRemarks2, DateTime.Now);
+                        }
                     }
 
                     // 가동 시간
@@ -744,6 +761,25 @@ namespace PKGSawKit_CleanerSystem_New
                     bLogCnt = false;
                 }
             }                       
+        }
+
+        private void EQ_INFO_LOAD()
+        {
+            StringBuilder sbEqInfo = new StringBuilder();
+            GetPrivateProfileString("EqInfo", "Type", "", sbEqInfo, sbEqInfo.Capacity, string.Format("{0}{1}", Global.ConfigurePath, "EqInfo.ini"));
+            Define.EqType = sbEqInfo.ToString();
+
+            GetPrivateProfileString("EqInfo", "LineCode", "", sbEqInfo, sbEqInfo.Capacity, string.Format("{0}{1}", Global.ConfigurePath, "EqInfo.ini"));
+            Define.EqLineCode = sbEqInfo.ToString();
+
+            GetPrivateProfileString("EqInfo", "Asset", "", sbEqInfo, sbEqInfo.Capacity, string.Format("{0}{1}", Global.ConfigurePath, "EqInfo.ini"));
+            Define.EqAsset = sbEqInfo.ToString();
+
+            GetPrivateProfileString("EqInfo", "Remarks1", "", sbEqInfo, sbEqInfo.Capacity, string.Format("{0}{1}", Global.ConfigurePath, "EqInfo.ini"));
+            Define.EqRemarks1 = sbEqInfo.ToString();
+
+            GetPrivateProfileString("EqInfo", "Remarks2", "", sbEqInfo, sbEqInfo.Capacity, string.Format("{0}{1}", Global.ConfigurePath, "EqInfo.ini"));
+            Define.EqRemarks2 = sbEqInfo.ToString();
         }
 
         private void RUNTIME_LOAD()

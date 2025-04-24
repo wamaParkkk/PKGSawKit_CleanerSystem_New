@@ -52,8 +52,7 @@ namespace PKGSawKit_CleanerSystem_New
         public static string ConfigurePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\Configure\"));
         public static string serialPortInfoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\"));
         public static string dailyCntfilePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\DailyCount\"));
-
-        public static string hostEquipmentInfo = "K5EE_PKGsawCleaningSystem";
+        
         public static string hostEquipmentInfo_Log = "K5EE_PKGsawCleaningSystemLog";
 
         private static Timer timer = new Timer();
@@ -62,10 +61,7 @@ namespace PKGSawKit_CleanerSystem_New
         public static TPrcsInfo prcsInfo;
 
         private static InterlockDisplayForm interlockDisplayForm;
-        private static uint nSeqWaitCnt = 0;
-
-        static string sendMsg_System = "Idle";
-        static string sendMsg_Water = "Idle";
+        private static uint nSeqWaitCnt = 0;        
 
         #region 이벤트로그 파일 폴더 및 파일 생성       
         public static void EventLog(string Msg, string moduleName, string Mode)
@@ -270,35 +266,12 @@ namespace PKGSawKit_CleanerSystem_New
             timer.Elapsed += new ElapsedEventHandler(VALUE_INTERLOCK_CHECK);
             timer.Start();
 
-            
+            GetDailyLogCount("PM1");
+            GetDailyLogCount("PM2");
+
             string strRtn = HostConnection.Connect();
-            if (strRtn == "OK")
-            {
-                HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "System", "Idle");                
-
-                HostConnection.Host_Set_RunStatus(hostEquipmentInfo, "PM1", "Idle");
-                HostConnection.Host_Set_RunStatus(hostEquipmentInfo, "PM2", "Idle");                
-
-                HostConnection.Host_Set_RecipeName(hostEquipmentInfo, "PM1", "");
-                HostConnection.Host_Set_RecipeName(hostEquipmentInfo, "PM2", "");                
-
-                HostConnection.Host_Set_AlarmName(hostEquipmentInfo, "PM1", "");
-                HostConnection.Host_Set_AlarmName(hostEquipmentInfo, "PM2", "");                
-
-                HostConnection.Host_Set_ProgressTime(hostEquipmentInfo, "PM1", "0/0");
-                HostConnection.Host_Set_ProgressTime(hostEquipmentInfo, "PM2", "0/0");                
-
-                HostConnection.Host_Set_ProcessEndTime(hostEquipmentInfo, "PM1", "");
-                HostConnection.Host_Set_ProcessEndTime(hostEquipmentInfo, "PM2", "");                                                
-
-                GetDailyLogCount("PM1");
-                GetDailyLogCount("PM2");
-            }
-            else
-            {
+            if (strRtn != "OK")
                 MessageBox.Show("EE 서버 접속에 실패했습니다", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }     
-            
         }
 
         public static void GetDailyLogCount(string moduleName)
@@ -512,22 +485,8 @@ namespace PKGSawKit_CleanerSystem_New
                     {
                         Define.sInterlockMsg = "";
                         Define.sInterlockChecklist = "";
-                    }
-
-                    if (sendMsg_System != "Alarm")
-                    {
-                        HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "System", "Alarm");
-                        sendMsg_System = "Alarm";
-                    }
-                }
-                else
-                {
-                    if (sendMsg_System != "Idle")
-                    {
-                        HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "System", "Idle");
-                        sendMsg_System = "Idle";
-                    }
-                }
+                    }                    
+                }                
                 /*
                 if (GetDigValue((int)DigInputList.Front_Door_Sensor_i) == "Off")
                 {
@@ -646,22 +605,8 @@ namespace PKGSawKit_CleanerSystem_New
                         {
                             Define.sInterlockMsg = "";
                             Define.sInterlockChecklist = "";
-                        }
-
-                        if (sendMsg_Water != "Alarm")
-                        {
-                            HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "WaterTank", "Alarm");
-                            sendMsg_Water = "Alarm";
-                        }
-                    }
-                    else
-                    {
-                        if (sendMsg_Water != "Alarm")
-                        {
-                            HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "WaterTank", "Alarm");
-                            sendMsg_Water = "Alarm";
-                        }
-                    }
+                        }                        
+                    }                    
                 }
                 else
                 {
@@ -671,13 +616,7 @@ namespace PKGSawKit_CleanerSystem_New
                         {
                             SetDigValue((int)DigOutputList.Hot_WaterHeater_o, (uint)DigitalOffOn.On, "PM1");
                         }
-                    }
-
-                    if (sendMsg_Water != "Idle")
-                    {
-                        HostConnection.Host_Set_SystemStatus(hostEquipmentInfo, "WaterTank", "Idle");
-                        sendMsg_Water = "Idle";
-                    }
+                    }                    
                 }
                 ////////////////////////////////////////////////////////////////////////////////////////////////
                 

@@ -412,5 +412,12 @@
 
         // Motor axis        
         public const int axis_r = 0;   // Brush rotation axis
+
+        // Sql서버에 장비 상태 업로드 변수
+        public static string EqType;
+        public static string EqLineCode;
+        public static string EqAsset;
+        public static string EqRemarks1;
+        public static string EqRemarks2;
     }    
 }

@@ -127,10 +127,7 @@ namespace PKGSawKit_CleanerSystem_New.Squence
             alarm_List.alarm_code = almId;
             Define.sAlarmName = alarm_List.alarm_code;
 
-            Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");
-
-            HostConnection.Host_Set_RunStatus(Global.hostEquipmentInfo, ModuleName, "Alarm");
-            HostConnection.Host_Set_AlarmName(Global.hostEquipmentInfo, ModuleName, Define.sAlarmName);
+            Global.EventLog(almId + ":" + Define.sAlarmName, ModuleName, "Alarm");            
         }
 
         public void F_HOLD_STEP()
